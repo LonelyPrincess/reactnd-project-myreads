@@ -19,9 +19,10 @@ class BookSearch extends React.Component {
   }
 
   updateQuery = (event) => {
-    const query = event.target.value.trim();
+    let query = event.target.value;
     this.setState({ query });
 
+    query = query.trim();
     if (BooksAPI.isValidQuery(query)) {
       this.performBookSearch(query);
     } else {

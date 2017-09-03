@@ -17,6 +17,12 @@ class BooksApp extends React.Component {
       .filter((book) => book.shelf === shelf)
   }
 
+  getBookShelf = (bookId) => {
+    let foundBook = this.state.books
+      .find((book) => book.id === bookId);
+    return foundBook ? foundBook.shelf : "none";
+  }
+
   loadBookListFromServer = () => {
     return BooksAPI.getAll()
       .then((books) => this.setState({ books }));
@@ -55,7 +61,9 @@ class BooksApp extends React.Component {
 
         { /* Search books page */ }
         <Route path='/search' render={() => (
-          <BookSearch onBookUpdated={this.loadBookListFromServer} />
+          <BookSearch
+            getBookShelf={this.getBookShelf}
+            onBookUpdated={this.loadBookListFromServer} />
         )} />
       </div>
     )

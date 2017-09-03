@@ -9,6 +9,7 @@ import * as BooksAPI from '../utils/BooksAPI';
 class BookSearch extends React.Component {
 
   static propTypes = {
+    getBookShelf: PropTypes.func.isRequired,
     onBookUpdated: PropTypes.func.isRequired
   }
 
@@ -29,8 +30,14 @@ class BookSearch extends React.Component {
   };
 
   performBookSearch = (query) => {
-    BooksAPI.search(query, 10)
-      .then((results) => this.setState({ results }));
+    BooksAPI.search(query)
+      .then((results) => {
+        let resultsWithShelves = results.map((book) => {
+          book.shelf = this.props.getBookShelf(book.id);
+          return book;
+        });
+        this.setState({ results: resultsWithShelves });
+      });
   };
 
   render() {

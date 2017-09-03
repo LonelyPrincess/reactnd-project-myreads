@@ -4,11 +4,16 @@ import { Route } from 'react-router-dom'
 import '../res/styles/App.css'
 
 import * as BooksAPI from './utils/BooksAPI'
-import BookListItem from './components/BookListItem'
+import BookShelf from './components/BookShelf'
 
 class BooksApp extends React.Component {
   state = {
     books: []
+  }
+
+  getBooksFromShelf = (shelf) => {
+    return this.state.books
+      .filter((book) => book.shelf === shelf)
   }
 
   // Retrieve books from API once component is inserted in DOM
@@ -29,36 +34,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {this.state.books
-                        .filter((book) => book.shelf === "currentlyReading")
-                        .map((book) => <BookListItem key={book.id} book={book} />)}
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {this.state.books
-                        .filter((book) => book.shelf === "wantToRead")
-                        .map((book) => <BookListItem key={book.id} book={book} />)}
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {this.state.books
-                        .filter((book) => book.shelf === "read")
-                        .map((book) => <BookListItem key={book.id} book={book} />)}
-                    </ol>
-                  </div>
-                </div>
+                <BookShelf title="Currently Reading" books={this.getBooksFromShelf("currentlyReading")} />
+                <BookShelf title="Want to Read" books={this.getBooksFromShelf("wantToRead")} />
+                <BookShelf title="Read" books={this.getBooksFromShelf("read")} />
               </div>
             </div>
             <div className="open-search">
@@ -82,7 +60,6 @@ class BooksApp extends React.Component {
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
                 <input type="text" placeholder="Search by title or author"/>
-
               </div>
             </div>
             <div className="search-books-results">

@@ -16,6 +16,28 @@ class BooksApp extends React.Component {
       .filter((book) => book.shelf === shelf)
   }
 
+  // Refresh book list by changing a book status
+  updateBookStatus = (book) => {
+    const bookIds = this.state.books.map((book) => book.id);
+    const bookIndex = bookIds.indexOf(book.id);
+
+    let books = this.state.books;
+    if (bookIndex !== -1) {
+      if (book.shelf === "none") {
+        console.log(`${book.title} removed from shelves`);
+        books.splice(bookIndex, 1);
+      } else {
+        console.log(`${book.title} moved to shelf ${book.shelf}`);
+        books[bookIndex] = book;
+      }
+    } else {
+      console.log(`${book.title} added to shelf ${book.shelf}`);
+      books.push(book);
+    }
+
+    this.setState({ books });
+  }
+
   // Retrieve books from API once component is inserted in DOM
   componentDidMount () {
     BooksAPI.getAll()
@@ -34,9 +56,12 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf title="Currently Reading" books={this.getBooksFromShelf("currentlyReading")} />
-                <BookShelf title="Want to Read" books={this.getBooksFromShelf("wantToRead")} />
-                <BookShelf title="Read" books={this.getBooksFromShelf("read")} />
+                <BookShelf title="Currently Reading" onUpdateBook={this.updateBookStatus}
+                  books={this.getBooksFromShelf("currentlyReading")} />
+                <BookShelf title="Want to Read" onUpdateBook={this.updateBookStatus}
+                  books={this.getBooksFromShelf("wantToRead")} />
+                <BookShelf title="Read" onUpdateBook={this.updateBookStatus}
+                  books={this.getBooksFromShelf("read")} />
               </div>
             </div>
             <div className="open-search">

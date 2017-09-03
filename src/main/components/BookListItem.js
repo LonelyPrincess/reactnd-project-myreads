@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import * as BooksAPI from '../utils/BooksAPI'
+
 function BookListItem (props) {
 
   let updateBookShelf = (event) => {
-    props.book.shelf = event.target.value;
-    props.onUpdateBook(props.book);
+    const shelf = event.target.value;
+    console.debug(shelf === "none"
+      ? `"${props.book.title}" will be removed from shelves`
+      : `"${props.book.title}" will be moved to shelf "${shelf}"`);
+
+    BooksAPI.update(props.book, shelf)
+      .then(props.onBookUpdated);
   };
 
   return (
@@ -32,7 +39,7 @@ function BookListItem (props) {
 
 BookListItem.propTypes = {
   book: PropTypes.object.isRequired,
-  onUpdateBook: PropTypes.func.isRequired
+  onBookUpdated: PropTypes.func.isRequired
 };
 
 export default BookListItem;

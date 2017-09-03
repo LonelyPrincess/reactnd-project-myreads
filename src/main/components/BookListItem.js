@@ -15,6 +15,11 @@ function BookListItem (props) {
       .then(props.onBookUpdated);
   };
 
+  let getAuthorListString = () => {
+    const authorList = props.book.authors;
+    return authorList ? authorList.join(", ") : "Unknown";
+  };
+
   return (
     <li>
       <div className="book">
@@ -31,7 +36,7 @@ function BookListItem (props) {
           </div>
         </div>
         <div className="book-title">{props.book.title}</div>
-        <div className="book-authors">{props.book.authors.map((author, index) => (index > 0 ? ", " : "" ) + author)}</div>
+        <div className="book-authors">{getAuthorListString()}</div>
       </div>
     </li>
   );

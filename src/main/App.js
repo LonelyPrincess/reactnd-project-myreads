@@ -23,14 +23,32 @@ class BooksApp extends React.Component {
     return foundBook ? foundBook.shelf : "none";
   }
 
-  loadBookListFromServer = () => {
-    return BooksAPI.getAll()
-      .then((books) => this.setState({ books }));
+  // Refresh book list by changing a book status
+  udateBookStatus = (book) => {
+    const bookIndex = this.state.books
+      .findIndex((item) => item.id === book.id);
+
+    let books = this.state.books;
+    if (bookIndex !== -1) {
+      if (book.shelf === "none") {
+        console.log(`"${book.title}" removed from shelves`);
+        books.splice(bookIndex, 1);
+      } else {
+        console.log(`"${book.title}" moved to shelf "${book.shelf}"`);
+        books[bookIndex] = book;
+      }
+    } else {
+      console.log(`"${book.title}" added to shelf "${book.shelf}"`);
+      books.push(book);
+    }
+
+    this.setState({ books });
   }
 
   // Retrieve books from API once component is inserted in DOM
   componentDidMount () {
-    this.loadBookListFromServer();
+    BooksAPI.getAll()
+      .then((books) => this.setState({ books }));
   }
 
   render() {
@@ -45,11 +63,11 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf title="Currently Reading" onBookUpdated={this.loadBookListFromServer}
+                <BookShelf title="Currently Reading" onBookUpdated={this.udateBookStatus}
                   books={this.getBooksFromShelf("currentlyReading")} />
-                <BookShelf title="Want to Read" onBookUpdated={this.loadBookListFromServer}
+                <BookShelf title="Want to Read" onBookUpdated={this.udateBookStatus}
                   books={this.getBooksFromShelf("wantToRead")} />
-                <BookShelf title="Read" onBookUpdated={this.loadBookListFromServer}
+                <BookShelf title="Read" onBookUpdated={this.udateBookStatus}
                   books={this.getBooksFromShelf("read")} />
               </div>
             </div>
@@ -63,7 +81,7 @@ class BooksApp extends React.Component {
         <Route path='/search' render={() => (
           <BookSearch
             getBookShelf={this.getBookShelf}
-            onBookUpdated={this.loadBookListFromServer} />
+            onBookUpdated={this.udateBookStatus} />
         )} />
       </div>
     )

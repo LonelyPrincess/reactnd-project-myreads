@@ -6,13 +6,14 @@ import * as BooksAPI from '../utils/BooksAPI'
 function BookListItem (props) {
 
   let updateBookShelf = (event) => {
+    const book = props.book;
     const shelf = event.target.value;
-    console.debug(shelf === "none"
-      ? `"${props.book.title}" will be removed from shelves`
-      : `"${props.book.title}" will be moved to shelf "${shelf}"`);
 
-    BooksAPI.update(props.book, shelf)
-      .then(props.onBookUpdated);
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        book.shelf = shelf;
+        props.onBookUpdated(book);
+      });
   };
 
   let getAuthorListString = () => {

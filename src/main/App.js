@@ -47,7 +47,7 @@ class BooksApp extends React.Component {
 
   // Retrieve books from API once component is inserted in DOM
   componentDidMount () {
-    BooksAPI.getAll()
+    BooksAPI.getUserBooks()
       .then((books) => this.setState({ books }));
   }
 

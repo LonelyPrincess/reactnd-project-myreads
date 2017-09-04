@@ -1,52 +1,89 @@
+/**
+ * This module contains a couple of methods that will make it possible to
+ * interact with the books' API used by this application.
+ *
+ * @module utils/BooksAPI
+ * @author Richard Kalehoff <richardkalehoff@gmail.com>
+ * @author LonelyPrincess <sara.her.su@gmail.com>
+ */
 
-const api = "https://reactnd-books-api.udacity.com"
+import { searchTerms } from '../constants/SearchTerms';
 
+const api = "https://reactnd-books-api.udacity.com";
+const availableSearchTerms = searchTerms.map((term) => term.toLowerCase());
 
-// Generate a unique token for storing your bookshelf data on the backend server.
-let token = localStorage.token
-if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
+// Generate a unique token for storing your bookshelf data on the backend server
+let token = localStorage.token;
+if (!token) {
+  token = localStorage.token = Math.random().toString(36).substr(-8);
+}
 
 const headers = {
   'Accept': 'application/json',
   'Authorization': token
-}
+};
 
-export const get = (bookId) =>
-  fetch(`${api}/books/${bookId}`, { headers })
+/**
+ * Obtain information on a specific book.
+ * @param {string} bookId
+ * @returns {Promise} Promise object with data on a single book.
+ */
+export const get = (bookId) => {
+  return fetch(`${api}/books/${bookId}`, { headers })
     .then(res => res.json())
-    .then(data => data.book)
+    .then(data => data.book);
+};
 
-export const getAll = () =>
-  fetch(`${api}/books`, { headers })
+/**
+ * Obtain the list of the books in current user's collection.
+ * @returns {Promise} Promise object with an array of books.
+ */
+export const getUserBooks = () => {
+  return fetch(`${api}/books`, { headers })
     .then(res => res.json())
-    .then(data => data.books)
+    .then(data => data.books);
+};
 
-export const update = (book, shelf) =>
-  fetch(`${api}/books/${book.id}`, {
+/**
+ * Update shelf for an existing book instance.
+ * @param {Object} book - Book to update.
+ * @param {string} shelf - Name of the shelf where the book will be stored.
+ * @returns {Promise} Promise object with an array containing the id of the
+ *  books in each of the available shelves.
+ */
+export const update = (book, shelf) => {
+  return fetch(`${api}/books/${book.id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ shelf })
-  }).then(res => res.json())
+  }).then(res => res.json());
+};
 
-export const search = (query, maxResults) =>
-  fetch(`${api}/search`, {
+/**
+ * Obtain list of books matching the specified query.
+ * @param {string} query - Search term.
+ * @returns {Promise} Promise object with an array of books.
+ */
+export const search = (query) => {
+  return fetch(`${api}/search`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ query, maxResults })
+    body: JSON.stringify({ query })
   }).then(res => res.json())
-    .then(data => data.books)
+    .then(data => data.books);
+};
 
-// Search terms that can be used as query
-const availableSearchTerms = ([
-  'Android','Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS' ]).map((term) => term.toLowerCase());
-
+/**
+ * Checks if current query matches one of the available search terms.
+ * @param {string} query - Search term.
+ * @returns {boolean}
+ */
 export const isValidQuery = (query) => {
   return availableSearchTerms.indexOf(query.toLowerCase()) !== -1;
-}
+};

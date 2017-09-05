@@ -8,14 +8,21 @@
  */
 
 import { searchTerms } from '../constants/SearchTerms';
+import { userToken } from '../constants/MockData';
 
 const api = "https://reactnd-books-api.udacity.com";
 const availableSearchTerms = searchTerms.map((term) => term.toLowerCase());
 
 // Generate a unique token for storing your bookshelf data on the backend server
-let token = localStorage.token;
-if (!token) {
-  token = localStorage.token = Math.random().toString(36).substr(-8);
+let token;
+try {
+  token = localStorage.token;
+  if (!token) {
+    token = localStorage.token = Math.random().toString(36).substr(-8);
+  }
+} catch (error) {
+  console.warn("Failed to init token due to an error! Using mock token instead...");
+  token = userToken;
 }
 
 const headers = {

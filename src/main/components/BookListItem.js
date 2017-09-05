@@ -9,10 +9,12 @@ function BookListItem (props) {
     const book = props.book;
     const shelf = event.target.value;
 
+    props.showLoader(true);
     BooksAPI.update(book, shelf)
       .then(() => {
         book.shelf = shelf;
         props.onBookUpdated(book);
+        props.showLoader(false);
       });
   };
 
@@ -45,6 +47,7 @@ function BookListItem (props) {
 
 BookListItem.propTypes = {
   book: PropTypes.object.isRequired,
+  showLoader: PropTypes.func.isRequired,
   onBookUpdated: PropTypes.func.isRequired
 };
 

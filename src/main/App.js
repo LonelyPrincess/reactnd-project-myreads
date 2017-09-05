@@ -6,10 +6,12 @@ import '../res/styles/App.css'
 import * as BooksAPI from './utils/BooksAPI'
 import BookShelf from './components/BookShelf'
 import BookSearch from './components/BookSearch'
+import Loader from './components/Loader'
 
 class BooksApp extends React.Component {
   state = {
-    books: []
+    books: [],
+    showLoader: false
   }
 
   getBooksFromShelf = (shelf) => {
@@ -21,6 +23,10 @@ class BooksApp extends React.Component {
     let foundBook = this.state.books
       .find((book) => book.id === bookId);
     return foundBook ? foundBook.shelf : "none";
+  }
+
+  showLoader = (value) => {
+    this.setState({ showLoader: value });
   }
 
   // Refresh book list by changing a book status
@@ -47,13 +53,15 @@ class BooksApp extends React.Component {
 
   // Retrieve books from API once component is inserted in DOM
   componentDidMount () {
+    this.setState({ showLoader: true });
     BooksAPI.getUserBooks()
-      .then((books) => this.setState({ books }));
+      .then((books) => this.setState({ books, showLoader: false }));
   }
 
   render() {
     return (
       <div className="app">
+        { this.state.showLoader && (<Loader />)}
 
         { /* Book list page */ }
         <Route exact path='/' render={() => (
@@ -63,11 +71,17 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf title="Currently Reading" onBookUpdated={this.udateBookStatus}
+                <BookShelf title="Currently Reading"
+                  showLoader={this.showLoader}
+                  onBookUpdated={this.udateBookStatus}
                   books={this.getBooksFromShelf("currentlyReading")} />
-                <BookShelf title="Want to Read" onBookUpdated={this.udateBookStatus}
+                <BookShelf title="Want to Read"
+                  showLoader={this.showLoader}
+                  onBookUpdated={this.udateBookStatus}
                   books={this.getBooksFromShelf("wantToRead")} />
-                <BookShelf title="Read" onBookUpdated={this.udateBookStatus}
+                <BookShelf title="Read"
+                  showLoader={this.showLoader}
+                  onBookUpdated={this.udateBookStatus}
                   books={this.getBooksFromShelf("read")} />
               </div>
             </div>
@@ -80,6 +94,7 @@ class BooksApp extends React.Component {
         { /* Search books page */ }
         <Route path='/search' render={() => (
           <BookSearch
+            showLoader={this.showLoader}
             getBookShelf={this.getBookShelf}
             onBookUpdated={this.udateBookStatus} />
         )} />

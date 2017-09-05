@@ -4,7 +4,7 @@ This is the final project for the first module of the [Udacity's React Nanodegre
 
 ## Project description
 
-This application will allow the user to keep track of their own personal library. It will include a list of the books that are already in their possession or those in their wishlist. Each of these books will be grouped in three _shelves_ depending on their status:
+The aim of this application is to allow the user to keep track of their own personal library. It includes a list of the books that are already in their possession or those in their wishlist. Each of these books will be grouped in three _shelves_ depending on their status:
 
 * Currently reading
 * Want to read
@@ -56,5 +56,10 @@ Now you only have to enter that URL into your favourite browser, and that's it! 
     ├── test # Code for unit testing is wrapped into this folder
 ```
 
-## Important
-The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
+## Aspects to consider
+
+### Project status
+This project is still **under development**, meaning some of the features may not work as expected. Missing features and bug fixes will be eventually commited to this repository.
+
+### Available search terms
+The provided API that serves as a backend for this application does only support a fixed set of search terms. The search page will _not_ return any results for any query that doesn't match any of the search terms specified [here](SEARCH_TERMS.md).

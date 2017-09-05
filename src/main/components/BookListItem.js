@@ -1,14 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import * as BooksAPI from '../utils/BooksAPI'
+
 function BookListItem (props) {
+
+  let updateBookShelf = (event) => {
+    const book = props.book;
+    const shelf = event.target.value;
+
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        book.shelf = shelf;
+        props.onBookUpdated(book);
+      });
+  };
+
+  let getAuthorListString = () => {
+    const authorList = props.book.authors;
+    return authorList ? authorList.join(", ") : "Unknown";
+  };
+
   return (
     <li>
       <div className="book">
         <div className="book-top">
           <div className="book-cover" style={{ backgroundImage: 'url("' + props.book.imageLinks.thumbnail + '")' }}></div>
           <div className="book-shelf-changer">
-            <select value={props.book.shelf || "none"} onChange={() => console.log('TODO: update book shelf') }>
+            <select value={props.book.shelf || "none"} onChange={updateBookShelf}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -18,15 +37,15 @@ function BookListItem (props) {
           </div>
         </div>
         <div className="book-title">{props.book.title}</div>
-        <div className="book-authors">{props.book.authors.map((author, index) => (index > 0 ? ", " : "" ) + author)}</div>
+        <div className="book-authors">{getAuthorListString()}</div>
       </div>
     </li>
   );
 }
 
-// TODO: include new prop to handle shelf change
 BookListItem.propTypes = {
-  book: PropTypes.object.isRequired
+  book: PropTypes.object.isRequired,
+  onBookUpdated: PropTypes.func.isRequired
 };
 
 export default BookListItem;

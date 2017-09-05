@@ -1,10 +1,11 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 import '../res/styles/App.css'
 
 import * as BooksAPI from './utils/BooksAPI'
 import BookShelf from './components/BookShelf'
+import BookSearch from './components/BookSearch'
 
 class BooksApp extends React.Component {
   state = {
@@ -16,9 +17,37 @@ class BooksApp extends React.Component {
       .filter((book) => book.shelf === shelf)
   }
 
+  getBookShelf = (bookId) => {
+    let foundBook = this.state.books
+      .find((book) => book.id === bookId);
+    return foundBook ? foundBook.shelf : "none";
+  }
+
+  // Refresh book list by changing a book status
+  udateBookStatus = (book) => {
+    const bookIndex = this.state.books
+      .findIndex((item) => item.id === book.id);
+
+    let books = this.state.books;
+    if (bookIndex !== -1) {
+      if (book.shelf === "none") {
+        console.log(`"${book.title}" removed from shelves`);
+        books.splice(bookIndex, 1);
+      } else {
+        console.log(`"${book.title}" moved to shelf "${book.shelf}"`);
+        books[bookIndex] = book;
+      }
+    } else {
+      console.log(`"${book.title}" added to shelf "${book.shelf}"`);
+      books.push(book);
+    }
+
+    this.setState({ books });
+  }
+
   // Retrieve books from API once component is inserted in DOM
   componentDidMount () {
-    BooksAPI.getAll()
+    BooksAPI.getUserBooks()
       .then((books) => this.setState({ books }));
   }
 
@@ -27,45 +56,32 @@ class BooksApp extends React.Component {
       <div className="app">
 
         { /* Book list page */ }
-        <Route exact path='/' render={({ history }) => (
+        <Route exact path='/' render={() => (
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf title="Currently Reading" books={this.getBooksFromShelf("currentlyReading")} />
-                <BookShelf title="Want to Read" books={this.getBooksFromShelf("wantToRead")} />
-                <BookShelf title="Read" books={this.getBooksFromShelf("read")} />
+                <BookShelf title="Currently Reading" onBookUpdated={this.udateBookStatus}
+                  books={this.getBooksFromShelf("currentlyReading")} />
+                <BookShelf title="Want to Read" onBookUpdated={this.udateBookStatus}
+                  books={this.getBooksFromShelf("wantToRead")} />
+                <BookShelf title="Read" onBookUpdated={this.udateBookStatus}
+                  books={this.getBooksFromShelf("read")} />
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => history.push('/search')}>Add a book</a>
+              <Link to="/search">Add a book</Link>
             </div>
           </div>
         )} />
 
         { /* Search books page */ }
-        <Route path='/search' render={({ history }) => (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a className="close-search" onClick={() => history.push('/')}>Close</a>
-              <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-                <input type="text" placeholder="Search by title or author"/>
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
+        <Route path='/search' render={() => (
+          <BookSearch
+            getBookShelf={this.getBookShelf}
+            onBookUpdated={this.udateBookStatus} />
         )} />
       </div>
     )

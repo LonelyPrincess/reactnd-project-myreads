@@ -59,7 +59,10 @@ Now you only have to enter that URL into your favourite browser, and that's it! 
 ## Aspects to consider
 
 ### Project status
-This project is still **under development**, meaning some of the features may not work as expected. Missing features and bug fixes will be eventually commited to this repository.
+This project is still **in development**, meaning some of the features may not work as expected. Missing features and bug fixes will be eventually commited to this repository.
+
+[![Inline docs](http://inch-ci.org/github/LonelyPrincess/reactnd-project-myreads.svg?branch=master&style=shields)](http://inch-ci.org/github/LonelyPrincess/reactnd-project-myreads)
+[![Build Status](https://travis-ci.org/LonelyPrincess/reactnd-project-myreads.svg?branch=master)](https://travis-ci.org/LonelyPrincess/reactnd-project-myreads)
 
 ### Available search terms
-The provided API that serves as a backend for this application does only support a fixed set of search terms. The search page will _not_ return any results for any query that doesn't match any of the search terms specified [here](SEARCH_TERMS.md).
+The provided API that serves as a backend for this application does only support a fixed set of search terms. The search page will _not_ return any results for queries that doesn't match any of the search terms specified in [this list](SEARCH_TERMS.md).

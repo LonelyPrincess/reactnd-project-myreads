@@ -67,7 +67,11 @@ This project is still **in development**, meaning some of the features may not w
 ### Available search terms
 The provided API that serves as a backend for this application does only support a fixed set of search terms. The search page will _not_ return any results for queries that doesn't match any of the search terms specified in [this list](SEARCH_TERMS.md).
 
-### Credits
+## Credits
+
+#### Image resources
+
+* [Freepik](http://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
 
 #### Development tools
 
@@ -76,6 +80,6 @@ The provided API that serves as a backend for this application does only support
 * [Travis CI](https://travis-ci.org/)
 * [Jest](https://facebook.github.io/jest/)
 
-#### Image resources
+#### Useful documentation
 
-* [Freepik](http://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
+* [Use JSDoc](http://usejsdoc.org/)

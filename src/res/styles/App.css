@@ -170,11 +170,33 @@ body, .app {
 .book-cover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
-  width: 128px;
-  height: 188px;
+  width: 130px;
+  height: 180px;
 }
+
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+.book-cover.no-image {
+  position: relative;
+}
+
+.book-cover.no-image::before {
+  content: "";
+  background: transparent;
+  width: 120px;
+  height: 170px;
+  border: dashed 2px black;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-size: 50%;
+  background-position: center;
+  box-sizing: border-box;
+  background-image: url('../images/no-image.svg');
+  opacity: 0.25;
+  background-repeat: no-repeat;
 }

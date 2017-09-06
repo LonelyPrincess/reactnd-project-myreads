@@ -1,6 +1,6 @@
 /**
- * This stateless component represents a book item as displayed on a list, only
- * with the most relevant information: title, authors and a thumbnail image.
+ * This stateless component represents a book item as displayed on a list with
+ * its most relevant information: title, authors and a thumbnail image.
  *
  * @module components/BookListItem
  * @author LonelyPrincess <sara.her.su@gmail.com>
@@ -13,13 +13,14 @@ import * as BooksAPI from '../utils/BooksAPI';
 
 function BookListItem (props) {
 
+  const book = props.book;
+
   /**
    * Handler for the 'change' event of the 'select' tag that allows the user to
    * move the book to another shelf. Updates the book' status on the server.
    * @param {Event} event - Contains information on the selected shelf.
    */
   let updateBookShelf = (event) => {
-    const book = props.book;
     const shelf = event.target.value;
 
     props.showLoader(true);
@@ -38,17 +39,28 @@ function BookListItem (props) {
    * @return {string}
    */
   let getAuthorListString = () => {
-    const authorList = props.book.authors;
-    return authorList ? authorList.join(", ") : "Unknown";
+    return book.authors ? book.authors.join(", ") : "Unknown";
+  };
+
+  /**
+   * Checks if there's a thumbnail available for the book.
+   * @return {boolean}
+   */
+  let isThumbnailAvailable = () => {
+    return (book.imageLinks && book.imageLinks.thumbnail);
   };
 
   return (
     <li>
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ backgroundImage: 'url("' + props.book.imageLinks.thumbnail + '")' }}></div>
+          {isThumbnailAvailable() ? (
+            <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
+          ) : (
+            <div className="book-cover no-image"></div>
+          )}
           <div className="book-shelf-changer">
-            <select value={props.book.shelf || "none"} onChange={updateBookShelf}>
+            <select value={book.shelf || "none"} onChange={updateBookShelf}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -57,7 +69,7 @@ function BookListItem (props) {
             </select>
           </div>
         </div>
-        <div className="book-title">{props.book.title}</div>
+        <div className="book-title">{book.title}</div>
         <div className="book-authors">{getAuthorListString()}</div>
       </div>
     </li>

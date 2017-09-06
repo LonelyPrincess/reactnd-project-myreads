@@ -1,5 +1,5 @@
 .loader-container {
-    background: rgba(35, 35, 35, 0.7);
+    background: rgba(255, 255, 255, 0.7);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -19,6 +19,7 @@
 }
 
 .loader-body > span {
+    position: relative;
     display: inline-block;
     vertical-align: middle;
     margin-top: 0;
@@ -46,37 +47,44 @@
 
 span.loader-letter-l {
     background: green;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em green;
 }
 
 span.loader-letter-o {
     margin-top: 1em;
     background: chocolate;
     animation-name: end-to-center;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em chocolate;
 }
 
 span.loader-letter-a {
     background: lightcoral;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em lightcoral;
 }
 
 span.loader-letter-d {
     margin-top: -1em;
     background: blue;
     animation-name: start-to-center;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em blue;
 }
 
 span.loader-letter-i {
     background: darkolivegreen;
     animation-name: center-to-start;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em darkolivegreen;
 }
 
 span.loader-letter-n {
     margin-top: 1em;
     background: mediumvioletred;
     animation-name: end-to-center;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em mediumvioletred;
 }
 
 span.loader-letter-g {
     background: brown;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em brown;
 }
 
 /* Animations */

@@ -1,10 +1,23 @@
+/**
+ * This stateless component represents a book item as displayed on a list, only
+ * with the most relevant information: title, authors and a thumbnail image.
+ *
+ * @module components/BookListItem
+ * @author LonelyPrincess <sara.her.su@gmail.com>
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import * as BooksAPI from '../utils/BooksAPI'
+import * as BooksAPI from '../utils/BooksAPI';
 
 function BookListItem (props) {
 
+  /**
+   * Handler for the 'change' event of the 'select' tag that allows the user to
+   * move the book to another shelf. Updates the book' status on the server.
+   * @param {Event} event - Contains information on the selected shelf.
+   */
   let updateBookShelf = (event) => {
     const book = props.book;
     const shelf = event.target.value;
@@ -18,6 +31,12 @@ function BookListItem (props) {
       });
   };
 
+  /**
+   * Creates a string with author names separated by commas based on the book's
+   * author array. If 'authors' field is missing from the book, it will be set to
+   * "Unknown".
+   * @return {string}
+   */
   let getAuthorListString = () => {
     const authorList = props.book.authors;
     return authorList ? authorList.join(", ") : "Unknown";

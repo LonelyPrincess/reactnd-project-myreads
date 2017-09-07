@@ -90,11 +90,11 @@ class BookDetails extends Component {
             <i className={"ico ico-star" + (book.averageRating > 2 ? " fill" : "")}></i>
             <i className={"ico ico-star" + (book.averageRating > 3 ? " fill" : "")}></i>
             <i className={"ico ico-star" + (book.averageRating > 4 ? " fill" : "")}></i>
-            <div className="review-count">(Based on {book.ratingsCount} reviews)</div>
+            <div className="review-count">(Based on {book.ratingsCount || 0} reviews)</div>
           </div>
 
           <div className="tags">
-            {book.categories.map((category, index) => (
+            {(book.categories || []).map((category, index) => (
               <span key={index}>{category}</span>
             ))}
           </div>

@@ -8,6 +8,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import * as BooksAPI from '../utils/BooksAPI';
 
@@ -54,11 +55,13 @@ function BookListItem (props) {
     <li>
       <div className="book">
         <div className="book-top">
-          {isThumbnailAvailable() ? (
-            <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
-          ) : (
-            <div className="book-cover no-image"></div>
-          )}
+          <Link to={`/details/${book.id}`}>
+            {isThumbnailAvailable() ? (
+              <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
+            ) : (
+              <div className="book-cover no-image"></div>
+            )}
+          </Link>
           <div className="book-shelf-changer">
             <select value={book.shelf || "none"} onChange={updateBookShelf}>
               <option value="none" disabled>Move to...</option>

@@ -63,7 +63,6 @@ body, .app {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
-  /*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
   box-shadow: darkgrey 1px 1px 5px 0;
   font-size: 0;
 }
@@ -157,8 +156,8 @@ body, .app {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
-  background-image: url('../images/icons/arrow-drop-down.svg');
+  background: dimgray;
+  background-image: url('../images/icons/move-down.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;

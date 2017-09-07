@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 html, body, .root {
   height: 100%;
 }
@@ -12,10 +14,13 @@ body, .app {
 
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
   text-align: center;
+  background: #91dc5a;
+  box-shadow: darkgrey 0 0 0.5em;
 }
+
 .list-books-title h1 {
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   margin: 0;
   color: white;
@@ -199,4 +204,109 @@ body, .app {
   background-image: url('../images/no-image.svg');
   opacity: 0.25;
   background-repeat: no-repeat;
+}
+
+/* -- Book details -- */
+.book-info {
+    padding: 0 1em;
+}
+
+.book-details {
+    padding: 2em;
+    max-width: 750px;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.book-meta {
+    display: flex;
+}
+
+.book-meta {
+    margin-bottom: 1.5em;
+}
+
+.book-details .book-title {
+    margin: 0;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.book-details ul {
+    font-size: 0.75em;
+    padding-left: 2em;
+    list-style-type: circle;
+}
+
+.book-subtitle {
+    font-size: 0.9em;
+}
+
+.book-details .book-cover {
+    flex-shrink: 0;
+}
+
+.tags {
+    text-align: center;
+    margin: 1.5em;
+}
+
+.tags span {
+    margin-right: 1em;
+    background: #91dc5a;
+    padding: 0.5em 1em;
+    color: white;
+    font-size: .8em;
+    text-transform: lowercase;
+    border-radius: 0.5em;
+}
+
+.tags span:nth-child(even) {
+    background: darkgray;
+}
+
+.book-summary {
+    text-align: justify;
+}
+
+@media screen and (max-width: 560px) {
+    .book-meta {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.ico {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    background: no-repeat center;
+    background-size: 100%;
+}
+
+.rating-stars {
+    text-align: center;
+    margin: 2em 0;
+}
+
+.rating-stars > .ico {
+    font-size: 1.5em;
+}
+
+.rating-stars > .ico:not(:first-child) {
+    margin-left: 0.5em;
+}
+
+.ico-star {
+    background-image: url('../images/icons/star-empty.svg');
+}
+
+.ico-star.fill {
+    background-image: url('../images/icons/star-filled.svg');
+}
+
+.rating-stars .review-count {
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    color: darkgray;
 }

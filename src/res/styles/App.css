@@ -58,12 +58,13 @@ body, .app {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
-  background-image: url('../images/icons/add.svg');
+  background: #ffaa50;
+  background-image: url('../images/icons/magnifying-glass-search.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  /*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+  box-shadow: darkgrey 1px 1px 5px 0;
   font-size: 0;
 }
 
@@ -212,7 +213,7 @@ body, .app {
 }
 
 .book-details {
-    padding: 2em;
+    padding: 3em 2em;
     max-width: 750px;
     box-sizing: border-box;
     margin: auto;
@@ -309,4 +310,46 @@ body, .app {
     font-size: 0.8em;
     margin-top: 0.5em;
     color: darkgray;
+}
+
+/* -- Easter egg -- */
+
+.book-cover {
+    position: relative;
+}
+
+.book-cover::before {
+    content: '';
+    left: 0;
+    top: -2.5em;
+    position: absolute;
+    width: 2.5em;
+    height: 2.5em;
+    background: no-repeat;
+    background-position-y: 2.5em;
+    background-image: url('https://image.flaticon.com/icons/svg/437/437562.svg');
+    transition: all 1s;
+}
+
+.book-cover:hover::before {
+    background-position-y: 0.5em;
+    transition: all 1s;
+}
+
+.book-cover::after {
+    content: 'Meow!';
+    left: 2.75em;
+    top: -1.75em;
+    opacity: 0;
+    font-size: 1em;
+    position: absolute;
+    color: darkgrey;
+    font-family: 'Montserrat', sans-serif;
+    height: 1em;
+    transition: all 1s;
+}
+
+.book-cover:hover::after {
+    opacity: 1;
+    transition: all 1s;
 }

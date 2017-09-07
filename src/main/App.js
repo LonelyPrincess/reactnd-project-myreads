@@ -6,6 +6,7 @@ import '../res/styles/App.css'
 import * as BooksAPI from './utils/BooksAPI'
 import BookShelf from './components/BookShelf'
 import BookSearch from './components/BookSearch'
+import BookDetails from './components/BookDetails'
 import Loader from './components/Loader'
 
 class BooksApp extends React.Component {
@@ -97,6 +98,13 @@ class BooksApp extends React.Component {
             showLoader={this.showLoader}
             getBookShelf={this.getBookShelf}
             onBookUpdated={this.udateBookStatus} />
+        )} />
+
+        { /* Book details page */ }
+        <Route path='/details/:bookId' render={(props) => (
+          <BookDetails
+            bookId={props.match.params.bookId}
+            showLoader={this.showLoader} />
         )} />
       </div>
     )

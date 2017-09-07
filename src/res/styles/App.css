@@ -222,7 +222,7 @@ body, .app {
     display: flex;
 }
 
-.book-meta {
+.book-meta > * {
     margin-bottom: 1.5em;
 }
 

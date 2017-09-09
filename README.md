@@ -71,9 +71,9 @@ The provided API that serves as a backend for this application does only support
 
 #### Image resources
 
-* [Google](http://google.com)
 * [Freepik](http://www.freepik.com)
 * [Flaticon](https://www.flaticon.com)
+* [Manda-Pie](http://manda-pie.deviantart.com)
 * [Alfredo Hernández](https://www.flaticon.com/authors/alfredo-hernandez)
 
 #### Development tools

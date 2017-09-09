@@ -104,7 +104,8 @@ class BooksApp extends React.Component {
         <Route path='/details/:bookId' render={(props) => (
           <BookDetails
             bookId={props.match.params.bookId}
-            showLoader={this.showLoader} />
+            showLoader={this.showLoader}
+            onBookUpdated={this.udateBookStatus} />
         )} />
       </div>
     )

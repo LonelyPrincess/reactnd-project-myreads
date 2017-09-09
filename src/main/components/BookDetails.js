@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import * as BooksAPI from '../utils/BooksAPI';
 
@@ -19,7 +20,8 @@ class BookDetails extends Component {
 
   static propTypes = {
     bookId: PropTypes.string.isRequired,
-    showLoader: PropTypes.func.isRequired
+    showLoader: PropTypes.func.isRequired,
+    onBookUpdated: PropTypes.func.isRequired
   };
 
   // Retrieve books from API once component is inserted in DOM
@@ -31,6 +33,24 @@ class BookDetails extends Component {
         this.props.showLoader(false);
       });
   }
+
+  /**
+   * Handler for the 'change' event of the 'select' tag that allows the user to
+   * move the book to another shelf. Updates the book' status on the server.
+   * @param {Event} event - Contains information on the selected shelf.
+   */
+  updateBookShelf = (event) => {
+    const shelf = event.target.value;
+    const book = this.state.book;
+
+    this.props.showLoader(true);
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        book.shelf = shelf;
+        this.props.onBookUpdated(book);
+        this.props.showLoader(false);
+      });
+  };
 
   /**
    * Creates a string with author names separated by commas based on the book's
@@ -60,45 +80,60 @@ class BookDetails extends Component {
 
     return (
       <div>
-        <div className="list-books-title">
+        <header>
+          <Link className="ico back-button" to="/">Go back</Link>
           <h1>MyReads</h1>
-        </div>
-        <div className="book-details">
-          <div className="book-meta">
-            {this.isThumbnailAvailable() ? (
-              <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
-            ) : (
-              <div className="book-cover no-image"></div>
-            )}
-            <div className="book-info">
-              <div className="book-title">{book.title}</div>
-              <div className="book-subtitle">{book.subtitle}</div>
-              <div className="book-authors">{this.getAuthorListString()}</div>
+          <i className="ico menu-button"></i>
+        </header>
+        <main>
+          <article className="book-details">
+            <section className="book-meta">
+              <div className="book-top">
+                {this.isThumbnailAvailable() ? (
+                  <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
+                ) : (
+                  <div className="book-cover no-image"></div>
+                )}
+                <div className="book-shelf-changer">
+                  <select value={book.shelf || "none"} onChange={this.updateBookShelf}>
+                    <option value="none" disabled>Move to...</option>
+                    <option value="currentlyReading">Currently Reading</option>
+                    <option value="wantToRead">Want to Read</option>
+                    <option value="read">Read</option>
+                    <option value="none">None</option>
+                  </select>
+                </div>
+              </div>
+              <div className="book-info">
+                <div className="book-title">{book.title}</div>
+                <div className="book-subtitle">{book.subtitle}</div>
+                <div className="book-authors">{this.getAuthorListString()}</div>
 
-              <ul>
-                <li>Number of pages: {book.pageCount}</li>
-                <li>Published by "{book.publisher}" on {book.publishedDate}</li>
-              </ul>
-            </div>
-          </div>
+                <ul>
+                  <li>Number of pages: {book.pageCount}</li>
+                  <li>Published by "{book.publisher}" on {book.publishedDate}</li>
+                </ul>
+              </div>
+            </section>
 
-          <div className="book-summary">{book.description}</div>
+            <section className="book-summary">{book.description}</section>
 
-          <div className="rating-stars">
-            <i className={"ico ico-star" + (book.averageRating ? " fill" : "")}></i>
-            <i className={"ico ico-star" + (book.averageRating > 1 ? " fill" : "")}></i>
-            <i className={"ico ico-star" + (book.averageRating > 2 ? " fill" : "")}></i>
-            <i className={"ico ico-star" + (book.averageRating > 3 ? " fill" : "")}></i>
-            <i className={"ico ico-star" + (book.averageRating > 4 ? " fill" : "")}></i>
-            <div className="review-count">(Based on {book.ratingsCount || 0} reviews)</div>
-          </div>
+            <section className="rating-stars">
+              <i className={"ico ico-star" + (book.averageRating ? " fill" : "")}></i>
+              <i className={"ico ico-star" + (book.averageRating > 1 ? " fill" : "")}></i>
+              <i className={"ico ico-star" + (book.averageRating > 2 ? " fill" : "")}></i>
+              <i className={"ico ico-star" + (book.averageRating > 3 ? " fill" : "")}></i>
+              <i className={"ico ico-star" + (book.averageRating > 4 ? " fill" : "")}></i>
+              <div className="review-count">(Based on {book.ratingsCount || 0} reviews)</div>
+            </section>
 
-          <div className="tags">
-            {(book.categories || []).map((category, index) => (
-              <span key={index}>{category}</span>
-            ))}
-          </div>
-        </div>
+            <section className="tags">
+              {(book.categories || []).map((category, index) => (
+                <span key={index}>{category}</span>
+              ))}
+            </section>
+          </article>
+        </main>
       </div>
     )
   };

@@ -1,3 +1,5 @@
+/* TODO: styles review and refactor needed */
+
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 html, body, .root {
@@ -326,7 +328,7 @@ body, .app {
     height: 2.5em;
     background: no-repeat;
     background-position-y: 2.5em;
-    background-image: url('https://image.flaticon.com/icons/svg/437/437562.svg');
+    background-image: url('../images/cat.svg');
     transition: all 1s;
 }
 
@@ -351,4 +353,59 @@ body, .app {
 .book-cover:hover::after {
     opacity: 1;
     transition: all 1s;
+}
+
+/* -- Other styles -- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: #91dc5a;
+    box-shadow: darkgrey 0 0 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    padding: 0.5em;
+}
+
+header h1 {
+    color: white;
+    font-size: 1em;
+    line-height: 1em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+header .ico {
+    color: transparent;
+    overflow: hidden;
+    background-size: 70%;
+}
+
+header .ico.back-button {
+    background-position-x: left;
+    background-image: url('../images/icons/go-back-left-arrow.svg');
+}
+
+header .ico.menu-button {
+    background-position-x: right;
+    background-image: url('../images/icons/show-more-button-with-three-dots.svg');
+}
+
+main {
+    padding-top: 4em;
+}
+
+.book-details .book-top {
+    height: auto;
+}
+
+.book-details .book-shelf-changer {
+    right: -10px;
 }

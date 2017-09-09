@@ -71,7 +71,9 @@ The provided API that serves as a backend for this application does only support
 
 #### Image resources
 
-* [Freepik](http://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
+* [Google](http://google.com)
+* [Freepik](http://www.freepik.com)
+* [Flaticon](https://www.flaticon.com/)
 
 #### Development tools
 

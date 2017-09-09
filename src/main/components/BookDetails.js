@@ -15,7 +15,8 @@ import * as BooksAPI from '../utils/BooksAPI';
 class BookDetails extends Component {
 
   state = {
-    book: null
+    book: null,
+    notFound: false
   };
 
   static propTypes = {
@@ -31,6 +32,10 @@ class BookDetails extends Component {
       .then((book) => {
         this.setState({ book });
         this.props.showLoader(false);
+      })
+      .catch((error) => {
+        console.warn("Failed to fetch book with id " + this.props.bookId);
+        this.setState({ notFound: true });
       });
   }
 
@@ -71,11 +76,33 @@ class BookDetails extends Component {
   };
 
   render() {
-    const book = this.state.book;
+    const { book, notFound } = this.state;
 
-    /* TODO: display an error message if the book was not found */
+    /* TODO:
+      - header and main containers must be moved to the app component, as not to duplicate code
+      - error page must become an independant component receiving two props: title and error message
+    */
     if (!book) {
-      return null;
+      if (!notFound) {
+        return null;
+      }
+
+      return (
+        <div>
+          <header>
+            <Link className="ico back-button" to="/">Go back</Link>
+            <h1>MyReads</h1>
+            <i className="ico menu-button"></i>
+          </header>
+          <main>
+            <section className="container error-message">
+              <h1>Houston, we have a problem!</h1>
+              <p>Sorry! We couldn't find the book you were looking for!</p>
+              <div className="crying-face"></div>
+            </section>
+          </main>
+        </div>
+      );
     }
 
     return (

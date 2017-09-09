@@ -409,3 +409,36 @@ main {
 .book-details .book-shelf-changer {
     right: -10px;
 }
+
+/* -- Error message -- */
+.error-message {
+    padding: 2em;
+    text-align: center;
+}
+
+.error-message h1 {
+    color: darkgrey;
+}
+
+.error-message .crying-face {
+    width: 150px;
+    height: 150px;
+    opacity: 0.1;
+    background-image: url('https://image.flaticon.com/icons/svg/156/156000.svg');
+    background-size: contain;
+    bottom: 0;
+    right: 0;
+    margin: 2em auto;
+    /*animation: darken 1s linear 0s infinite alternate;*/
+}
+
+@keyframes darken {
+    from    { opacity: 0.1; }
+    to      { opacity: 0.25; }
+}
+
+.container {
+    max-width: 750px;
+    box-sizing: border-box;
+    margin: auto;
+}

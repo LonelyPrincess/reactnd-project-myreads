@@ -73,7 +73,8 @@ The provided API that serves as a backend for this application does only support
 
 * [Google](http://google.com)
 * [Freepik](http://www.freepik.com)
-* [Flaticon](https://www.flaticon.com/)
+* [Flaticon](https://www.flaticon.com)
+* [Alfredo Hernández](https://www.flaticon.com/authors/alfredo-hernandez)
 
 #### Development tools
 

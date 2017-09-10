@@ -97,13 +97,14 @@ class BooksApp extends React.Component {
    * @returns JSX template for the component.
    */
   render() {
+    const currentPath = window.location.pathname;
+
     return (
       <div className="app">
         {this.state.showLoader && (<Loader />)}
 
-        {/* TODO: hide back button when we're on the list page */}
-        <header>
-          <Link className={`ico ${"back-button"}`} to="/">Go back</Link>
+        <header className={currentPath === '/' ? "without-back-button" : null}>
+          {currentPath !== '/' && (<Link className="ico back-button" to="/">Go back</Link>)}
           <h1>MyReads</h1>
           <i className="ico menu-button"></i>
         </header>

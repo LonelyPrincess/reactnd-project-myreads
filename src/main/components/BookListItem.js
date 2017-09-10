@@ -1,3 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import * as BooksAPI from '../utils/BooksAPI';
+
 /**
  * This stateless component represents a book item as displayed on a list with
  * its most relevant information: title, authors and a thumbnail image.
@@ -5,14 +11,7 @@
  * @module components/BookListItem
  * @author LonelyPrincess <sara.her.su@gmail.com>
  */
-
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-
-import * as BooksAPI from '../utils/BooksAPI';
-
-function BookListItem (props) {
+function BookListItem(props) {
 
   const book = props.book;
 
@@ -52,29 +51,30 @@ function BookListItem (props) {
   };
 
   return (
-    <li>
-      <div className="book">
-        <div className="book-top">
-          <Link to={`/details/${book.id}`}>
-            {isThumbnailAvailable() ? (
-              <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
-            ) : (
-              <div className="book-cover no-image"></div>
-            )}
-          </Link>
-          <div className="book-shelf-changer">
-            <select value={book.shelf || "none"} onChange={updateBookShelf}>
-              <option value="placeholder" disabled>Move to...</option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
-            </select>
-          </div>
+    <li className="book">
+      <div className="book-top">
+        <Link className="book-top" to={`/details/${book.id}`}>
+          {isThumbnailAvailable() ? (
+            <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
+          ) : (
+            <div className="book-cover">
+              <span className="no-image"></span>
+            </div>
+          )}
+        </Link>
+        <div className="book-shelf-changer">
+          <select value={book.shelf || "none"} onChange={updateBookShelf}>
+            <option value="placeholder" disabled>Move to...</option>
+            <option value="currentlyReading">Currently Reading</option>
+            <option value="wantToRead">Want to Read</option>
+            <option value="read">Read</option>
+            <option value="none">None</option>
+          </select>
         </div>
-        <div className="book-title">{book.title}</div>
-        <div className="book-authors">{getAuthorListString()}</div>
       </div>
+
+      <div className="book-title">{book.title}</div>
+      <div className="book-authors">{getAuthorListString()}</div>
     </li>
   );
 }

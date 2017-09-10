@@ -98,8 +98,8 @@ class BooksApp extends React.Component {
           <h1>MyReads</h1>
           <i className="ico menu-button"></i>
         </header>
-        <main>
 
+        <main>
           { /* Book list page */}
           <Route exact path='/' render={() => (
             <BookList

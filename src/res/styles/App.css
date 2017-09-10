@@ -45,6 +45,8 @@ body, .app {
 
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
+  padding: 0.1em 0.25em;
+  text-align: center;
 }
 .bookshelf-books {
   text-align: center;
@@ -110,6 +112,7 @@ body, .app {
 
 .book {
   width: 140px;
+  box-sizing: content-box;
 }
 .book-title,
 .book-authors {
@@ -165,11 +168,14 @@ body, .app {
   font-size: 0.8em;
 }
 
-.book-cover.no-image {
-  position: relative;
+.book-cover .no-image {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
-.book-cover.no-image::before {
+.book-cover .no-image::before {
   content: "";
   background: transparent;
   width: 120px;

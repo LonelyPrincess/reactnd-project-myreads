@@ -87,7 +87,6 @@ class BookDetails extends Component {
       }
 
       return (
-
         <section className="container error-message">
           <h1>Houston, we have a problem!</h1>
           <p>Sorry! We couldn't find the book you were looking for!</p>
@@ -103,7 +102,9 @@ class BookDetails extends Component {
             {this.isThumbnailAvailable() ? (
               <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
             ) : (
-                <div className="book-cover no-image"></div>
+                <div className="book-cover">
+                  <span className="no-image"></span>
+                </div>
               )}
             <div className="book-shelf-changer">
               <select value={book.shelf || "none"} onChange={this.updateBookShelf}>

@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 
 import BookListItem from './BookListItem';
 
+/**
+ * Stateless component to render an user shelf, displaying both its title and
+ * the books that the user has put into it.
+ *
+ * @module components/BookList
+ * @author LonelyPrincess <sara.her.su@gmail.com>
+ */
 function BookShelf (props) {
   return (
     <div className="bookshelf">

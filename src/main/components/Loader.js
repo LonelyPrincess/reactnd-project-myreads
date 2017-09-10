@@ -2,6 +2,14 @@ import React from 'react';
 
 import '../../res/styles/Loader.css';
 
+/**
+ * Stateless component to render a loading message that can be used whenever an
+ * AJAX request is being performed, to let the user know something's going on
+ * while the browser receives a response from the external server.
+ *
+ * @module components/Loader
+ * @author LonelyPrincess <sara.her.su@gmail.com>
+ */
 function Loader () {
   return (
     <div className="loader-container">

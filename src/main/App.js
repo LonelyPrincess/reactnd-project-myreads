@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom';
 
 import Loader from './components/Loader';
 import * as BooksAPI from './utils/BooksAPI';
-import BookShelf from './components/BookShelf';
+import BookList from './components/BookList';
 import BookSearch from './components/BookSearch';
 import BookDetails from './components/BookDetails';
 
@@ -23,16 +23,6 @@ class BooksApp extends React.Component {
   state = {
     books: [],
     showLoader: false
-  };
-
-  /**
-   * Obtain all of the user's book that belong to a certain shelf.
-   * @param {string} shelf
-   * @returns {array} List of books that belong to the selected shelf.
-   */
-  getBooksFromShelf = (shelf) => {
-    return this.state.books
-      .filter((book) => book.shelf === shelf)
   };
 
   /**
@@ -60,7 +50,7 @@ class BooksApp extends React.Component {
    * component's state.
    * @param {Object} book - Book instance that was moved to a new shelf.
    */
-  udateBookStatus = (book) => {
+  updateBookStatus = (book) => {
     const bookIndex = this.state.books
       .findIndex((item) => item.id === book.id);
 
@@ -112,27 +102,10 @@ class BooksApp extends React.Component {
 
           { /* Book list page */}
           <Route exact path='/' render={() => (
-            <div className="list-books">
-              <div className="list-books-content">
-                <div>
-                  <BookShelf title="Currently Reading"
-                    showLoader={this.showLoader}
-                    onBookUpdated={this.udateBookStatus}
-                    books={this.getBooksFromShelf("currentlyReading")} />
-                  <BookShelf title="Want to Read"
-                    showLoader={this.showLoader}
-                    onBookUpdated={this.udateBookStatus}
-                    books={this.getBooksFromShelf("wantToRead")} />
-                  <BookShelf title="Read"
-                    showLoader={this.showLoader}
-                    onBookUpdated={this.udateBookStatus}
-                    books={this.getBooksFromShelf("read")} />
-                </div>
-              </div>
-              <div className="open-search">
-                <Link to="/search">Add a book</Link>
-              </div>
-            </div>
+            <BookList
+              books={this.state.books}
+              showLoader={this.showLoader}
+              onBookUpdated={this.updateBookStatus} />
           )} />
 
           { /* Search books page */}
@@ -140,7 +113,7 @@ class BooksApp extends React.Component {
             <BookSearch
               showLoader={this.showLoader}
               getBookShelf={this.getBookShelf}
-              onBookUpdated={this.udateBookStatus} />
+              onBookUpdated={this.updateBookStatus} />
           )} />
 
           { /* Book details page */}
@@ -148,7 +121,7 @@ class BooksApp extends React.Component {
             <BookDetails
               bookId={props.match.params.bookId}
               showLoader={this.showLoader}
-              onBookUpdated={this.udateBookStatus} />
+              onBookUpdated={this.updateBookStatus} />
           )} />
         </main>
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 
 import Loader from './components/Loader';
+import AppInfo from './components/AppInfo';
 import * as BooksAPI from './utils/BooksAPI';
 import BookList from './components/BookList';
 import BookSearch from './components/BookSearch';
@@ -103,25 +104,31 @@ class BooksApp extends React.Component {
   render() {
     const currentPath = window.location.pathname;
 
+    const headerClass = currentPath === '/'
+      ? "without-back-button"
+      : (currentPath === '/about'
+        ? "without-info-button"
+        : null);
+
     return (
       <div className="app">
         {this.state.showLoader && (<Loader />)}
 
-        <header className={currentPath === '/' ? "without-back-button" : null}>
+        <header className={headerClass}>
           {currentPath !== '/' && (<Link className="ico back-button" to="/">Go back</Link>)}
           <h1>MyReads</h1>
-          <i className="ico menu-button"></i>
+          {currentPath !== '/about' && (<Link className="ico info-button" to="/about"></Link>)}
         </header>
 
         <main>
-          { /* Book list page */}
+          { /* Book list page */ }
           <Route exact path='/' render={() => (
             <BookList
               books={this.state.books}
               onShelfChange={this.moveBookToShelf} />
           )} />
 
-          { /* Search books page */}
+          { /* Search books page */ }
           <Route path='/search' render={() => (
             <BookSearch
               showLoader={this.showLoader}
@@ -129,16 +136,19 @@ class BooksApp extends React.Component {
               onShelfChange={this.moveBookToShelf} />
           )} />
 
-          { /* Book details page */}
+          { /* Book details page */ }
           <Route path='/details/:bookId' render={(props) => (
             <BookDetails
               bookId={props.match.params.bookId}
               showLoader={this.showLoader}
               onShelfChange={this.moveBookToShelf} />
           )} />
+
+          { /* About page */ }
+          <Route path='/about' component={AppInfo} />
         </main>
       </div>
-    )
+    );
   }
 }
 

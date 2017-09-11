@@ -370,6 +370,10 @@ header.without-back-button {
     padding-left: 1.5em;
 }
 
+header.without-info-button {
+    padding-right: 1.5em;
+}
+
 header .ico {
     color: transparent;
     overflow: hidden;
@@ -381,7 +385,7 @@ header .ico.back-button {
     background-image: url('../images/icons/go-back-left-arrow.svg');
 }
 
-header .ico.menu-button {
+header .ico.info-button {
     background-position-x: right;
     background-image: url('../images/icons/show-more-button-with-three-dots.svg');
 }
@@ -429,4 +433,5 @@ main {
     max-width: 750px;
     box-sizing: border-box;
     margin: auto;
+    padding: 2em;
 }

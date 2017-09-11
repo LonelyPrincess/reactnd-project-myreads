@@ -1,0 +1,27 @@
+[data-page='about'] > section:not(:first-child) {
+    margin-top: 2.5em;
+}
+
+[data-page='about'] h2 {
+    color: #91dc5a;
+}
+
+[data-page='about'] p {
+    text-align: justify;
+}
+
+[data-page='about'] i {
+    color: darkgrey;
+}
+
+[data-page='about'] a,
+[data-page='about'] a:active,
+[data-page='about'] a:visited {
+    color: orange;
+    transition: color 1s;
+}
+
+[data-page='about'] a:hover,
+[data-page='about'] a:focus {
+    color: orangered;
+}

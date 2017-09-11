@@ -37,8 +37,7 @@ function BookList (props) {
             <BookShelf
               key={shelf.id}
               title={shelf.name}
-              showLoader={props.showLoader}
-              onBookUpdated={props.onBookUpdated}
+              onShelfChange={props.onShelfChange}
               books={getBooksFromShelf(shelf.id)} />
           ))}
         </div>
@@ -52,8 +51,7 @@ function BookList (props) {
 
 BookList.propTypes = {
   books: PropTypes.array.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  onBookUpdated: PropTypes.func.isRequired
+  onShelfChange: PropTypes.func.isRequired
 };
 
 export default BookList;

@@ -51,10 +51,10 @@ class BooksApp extends React.Component {
    * @param {Object} book - Book instance that was moved to a new shelf.
    */
   updateBookStatus = (book) => {
-    const bookIndex = this.state.books
+    const books = this.state.books;
+    const bookIndex = books
       .findIndex((item) => item.id === book.id);
 
-    let books = this.state.books;
     if (bookIndex !== -1) {
       if (book.shelf === "none") {
         console.log(`"${book.title}" removed from shelves`);
@@ -69,6 +69,20 @@ class BooksApp extends React.Component {
     }
 
     this.setState({ books });
+  };
+
+  /**
+   * Moves a book to a new the shelf by calling the update method in the API.
+   * @param {Object} book - Book instance that was moved to a new shelf.
+   */
+  moveBookToShelf = (book, shelf) => {
+    this.showLoader(true);
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        book.shelf = shelf;
+        this.updateBookStatus(book);
+        this.showLoader(false);
+      });
   };
 
   /**
@@ -104,8 +118,7 @@ class BooksApp extends React.Component {
           <Route exact path='/' render={() => (
             <BookList
               books={this.state.books}
-              showLoader={this.showLoader}
-              onBookUpdated={this.updateBookStatus} />
+              onShelfChange={this.moveBookToShelf} />
           )} />
 
           { /* Search books page */}
@@ -113,7 +126,7 @@ class BooksApp extends React.Component {
             <BookSearch
               showLoader={this.showLoader}
               getBookShelf={this.getBookShelf}
-              onBookUpdated={this.updateBookStatus} />
+              onShelfChange={this.moveBookToShelf} />
           )} />
 
           { /* Book details page */}
@@ -121,7 +134,7 @@ class BooksApp extends React.Component {
             <BookDetails
               bookId={props.match.params.bookId}
               showLoader={this.showLoader}
-              onBookUpdated={this.updateBookStatus} />
+              onShelfChange={this.moveBookToShelf} />
           )} />
         </main>
       </div>

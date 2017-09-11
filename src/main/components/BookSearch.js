@@ -16,7 +16,7 @@ class BookSearch extends React.Component {
   static propTypes = {
     showLoader: PropTypes.func.isRequired,
     getBookShelf: PropTypes.func.isRequired,
-    onBookUpdated: PropTypes.func.isRequired
+    onShelfChange: PropTypes.func.isRequired
   };
 
   state = {
@@ -82,8 +82,7 @@ class BookSearch extends React.Component {
           <ol className="books-grid">
             {results.map((book) => (
               <BookListItem key={book.id} book={book}
-                showLoader={this.props.showLoader}
-                onBookUpdated={this.props.onBookUpdated} />
+                onShelfChange={this.props.onShelfChange} />
             ))}
           </ol>
         </section>

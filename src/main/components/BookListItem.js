@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import * as BooksAPI from '../utils/BooksAPI';
+import BookShelfSelector from './BookShelfSelector';
 
 /**
  * This stateless component represents a book item as displayed on a list with
@@ -11,26 +11,9 @@ import * as BooksAPI from '../utils/BooksAPI';
  * @module components/BookListItem
  * @author LonelyPrincess <sara.her.su@gmail.com>
  */
-function BookListItem(props) {
+function BookListItem (props) {
 
   const book = props.book;
-
-  /**
-   * Handler for the 'change' event of the 'select' tag that allows the user to
-   * move the book to another shelf. Updates the book' status on the server.
-   * @param {Event} event - Contains information on the selected shelf.
-   */
-  let updateBookShelf = (event) => {
-    const shelf = event.target.value;
-
-    props.showLoader(true);
-    BooksAPI.update(book, shelf)
-      .then(() => {
-        book.shelf = shelf;
-        props.onBookUpdated(book);
-        props.showLoader(false);
-      });
-  };
 
   /**
    * Creates a string with author names separated by commas based on the book's
@@ -62,15 +45,7 @@ function BookListItem(props) {
             </div>
           )}
         </Link>
-        <div className="book-shelf-changer">
-          <select value={book.shelf || "none"} onChange={updateBookShelf}>
-            <option value="placeholder" disabled>Move to...</option>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
-          </select>
-        </div>
+        <BookShelfSelector book={book} onShelfChange={props.onShelfChange} />
       </div>
 
       <div className="book-title">{book.title}</div>
@@ -81,8 +56,7 @@ function BookListItem(props) {
 
 BookListItem.propTypes = {
   book: PropTypes.object.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  onBookUpdated: PropTypes.func.isRequired
+  onShelfChange: PropTypes.func.isRequired
 };
 
 export default BookListItem;

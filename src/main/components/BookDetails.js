@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import * as BooksAPI from '../utils/BooksAPI';
+import BookShelfSelector from './BookShelfSelector';
 
 // TODO: create new component with common methods to this and 'BookListItem', so we don't have duplicate code
 
@@ -21,7 +22,7 @@ class BookDetails extends Component {
   static propTypes = {
     bookId: PropTypes.string.isRequired,
     showLoader: PropTypes.func.isRequired,
-    onBookUpdated: PropTypes.func.isRequired
+    onShelfChange: PropTypes.func.isRequired
   };
 
   // Retrieve books from API once component is inserted in DOM
@@ -37,24 +38,6 @@ class BookDetails extends Component {
         this.setState({ notFound: true });
       });
   }
-
-  /**
-   * Handler for the 'change' event of the 'select' tag that allows the user to
-   * move the book to another shelf. Updates the book' status on the server.
-   * @param {Event} event - Contains information on the selected shelf.
-   */
-  updateBookShelf = (event) => {
-    const shelf = event.target.value;
-    const book = this.state.book;
-
-    this.props.showLoader(true);
-    BooksAPI.update(book, shelf)
-      .then(() => {
-        book.shelf = shelf;
-        this.props.onBookUpdated(book);
-        this.props.showLoader(false);
-      });
-  };
 
   /**
    * Creates a string with author names separated by commas based on the book's
@@ -78,7 +61,6 @@ class BookDetails extends Component {
     const { book, notFound } = this.state;
 
     /* TODO:
-      - header and main containers must be moved to the app component, as not to duplicate code
       - error page must become an independant component receiving two props: title and error message
     */
     if (!book) {
@@ -102,19 +84,11 @@ class BookDetails extends Component {
             {this.isThumbnailAvailable() ? (
               <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
             ) : (
-                <div className="book-cover">
-                  <span className="no-image"></span>
-                </div>
-              )}
-            <div className="book-shelf-changer">
-              <select value={book.shelf || "none"} onChange={this.updateBookShelf}>
-                <option value="placeholder" disabled>Move to...</option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
-              </select>
-            </div>
+              <div className="book-cover">
+                <span className="no-image"></span>
+              </div>
+            )}
+            <BookShelfSelector book={book} onShelfChange={this.props.onShelfChange} />
           </div>
           <div className="book-info">
             <div className="book-title">{book.title}</div>

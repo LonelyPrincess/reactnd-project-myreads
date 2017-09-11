@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import * as BooksAPI from '../utils/BooksAPI';
+import TroubleReport from './TroubleReport';
 import BookShelfSelector from './BookShelfSelector';
 
 // TODO: create new component with common methods to this and 'BookListItem', so we don't have duplicate code
@@ -60,20 +61,13 @@ class BookDetails extends Component {
   render() {
     const { book, notFound } = this.state;
 
-    /* TODO:
-      - error page must become an independant component receiving two props: title and error message
-    */
     if (!book) {
       if (!notFound) {
         return null;
       }
 
       return (
-        <section className="container error-message">
-          <h1>Houston, we have a problem!</h1>
-          <p>Sorry! We couldn't find the book you were looking for!</p>
-          <div className="crying-face"></div>
-        </section>
+        <TroubleReport message="Sorry! We couldn't find the book you were looking for!" />
       );
     }
 

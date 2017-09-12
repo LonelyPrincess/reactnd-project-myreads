@@ -6,6 +6,10 @@
     color: #91dc5a;
 }
 
+[data-page='about'] h2:first-child {
+    margin: 0;
+}
+
 [data-page='about'] p {
     text-align: justify;
 }

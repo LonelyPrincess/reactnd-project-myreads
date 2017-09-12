@@ -115,7 +115,7 @@ class BooksApp extends React.Component {
         {this.state.showLoader && (<Loader />)}
 
         <header className={headerClass}>
-          {currentPath !== '/' && (<Link className="ico back-button" to="/">Go back</Link>)}
+          {currentPath !== '/' && (<Link className="ico back-button" to="/"></Link>)}
           <h1>MyReads</h1>
           {currentPath !== '/about' && (<Link className="ico info-button" to="/about"></Link>)}
         </header>

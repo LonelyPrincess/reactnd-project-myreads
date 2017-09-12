@@ -5,8 +5,6 @@ import * as BooksAPI from '../utils/BooksAPI';
 import TroubleReport from './TroubleReport';
 import BookShelfSelector from './BookShelfSelector';
 
-// TODO: create new component with common methods to this and 'BookListItem', so we don't have duplicate code
-
 /**
  * Component used to render detailed information on a book.
  *
@@ -72,7 +70,7 @@ class BookDetails extends Component {
     }
 
     return (
-      <article className="book-details">
+      <article className="book-details container" data-page="book-details">
         <section className="book-meta">
           <div className="book-top">
             {this.isThumbnailAvailable() ? (

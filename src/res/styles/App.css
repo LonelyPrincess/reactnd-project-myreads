@@ -90,6 +90,27 @@ main h2 {
     color: #91dc5a;
 }
 
+main p {
+    text-align: justify;
+}
+
+main i {
+    color: darkgrey;
+}
+
+main a,
+main a:active,
+main a:visited {
+    color: orange;
+    transition: color 1s;
+    text-decoration: none;
+}
+
+main a:hover,
+main a:focus {
+    color: orangered;
+}
+
 /* -- Generic classes -- */
 
 .ico {
@@ -158,7 +179,16 @@ main h2 {
 
 /* -- Search input -- */
 
+.search-books {
+    padding-top: 3.25em;
+}
+
 .search-books input[name='query'] {
+    position: fixed;
+    top: 3.2em;
+    left: 0;
+    right: 0;
+    z-index: 2;
     width: 100%;
     border: none;
     outline: none;
@@ -409,6 +439,9 @@ main h2 {
 
 [data-page='trouble-report'] {
     padding: 2em;
+}
+
+[data-page='trouble-report'] > * {
     text-align: center;
 }
 
@@ -423,4 +456,19 @@ main h2 {
     background-image: url('../images/crying.svg');
     background-size: contain;
     margin: 2em auto;
+}
+
+/*   ABOUT THE APP
+ * ------------------------------------------------------------------------- */
+
+[data-page='about'] > section:not(:first-child) {
+    margin-top: 2.5em;
+}
+
+[data-page='about'] ul li {
+    line-height: 2;
+}
+
+[data-page='about'] h2:first-child {
+    margin: 0;
 }

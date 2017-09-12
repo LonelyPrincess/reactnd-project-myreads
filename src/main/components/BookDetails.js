@@ -56,6 +56,22 @@ class BookDetails extends Component {
     return (this.state.book.imageLinks && this.state.book.imageLinks.thumbnail);
   };
 
+  /**
+   * Obtains an array stating which of the rating stars should be highlighted
+   * depending on the book's average rating.
+   * @return {array} - Array with the status for each of the rating stars.
+   */
+  getRatingStarStatus = () => {
+    const avgRating = this.state.book.averageRating || 0;
+
+    let highlightStar = [];
+    for (let i = 0; i < 5; i++) {
+      highlightStar.push(avgRating > i);
+    }
+
+    return highlightStar;
+  };
+
   render() {
     const { book, notFound } = this.state;
 
@@ -70,8 +86,8 @@ class BookDetails extends Component {
     }
 
     return (
-      <article className="book-details container" data-page="book-details">
-        <section className="book-meta">
+      <article className="container" data-page="book-details">
+        <section className="book-details">
           <div className="book-top">
             {this.isThumbnailAvailable() ? (
               <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
@@ -97,11 +113,9 @@ class BookDetails extends Component {
         <section className="book-summary">{book.description}</section>
 
         <section className="rating-stars">
-          <i className={"ico ico-star" + (book.averageRating ? " fill" : "")}></i>
-          <i className={"ico ico-star" + (book.averageRating > 1 ? " fill" : "")}></i>
-          <i className={"ico ico-star" + (book.averageRating > 2 ? " fill" : "")}></i>
-          <i className={"ico ico-star" + (book.averageRating > 3 ? " fill" : "")}></i>
-          <i className={"ico ico-star" + (book.averageRating > 4 ? " fill" : "")}></i>
+          {this.getRatingStarStatus().map((highlightStar, index) => (
+            <i key={index} className={"ico " + (highlightStar ? "ico-star" : "ico-star-outline")}></i>
+          ))}
           <div className="review-count">(Based on {book.ratingsCount || 0} reviews)</div>
         </section>
 

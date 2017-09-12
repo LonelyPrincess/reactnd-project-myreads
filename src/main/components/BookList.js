@@ -30,9 +30,8 @@ function BookList (props) {
   };
 
   return (
-    <div className="list-books">
-      <div className="list-books-content">
-        <div>
+    <section data-page="user-books">
+      <div className="container full-width">
           { shelves.map((shelf) => (
             <BookShelf
               key={shelf.id}
@@ -40,12 +39,11 @@ function BookList (props) {
               onShelfChange={props.onShelfChange}
               books={getBooksFromShelf(shelf.id)} />
           ))}
-        </div>
       </div>
       <div className="open-search">
         <Link to="/search">Add a book</Link>
       </div>
-    </div>
+    </section>
   );
 };
 

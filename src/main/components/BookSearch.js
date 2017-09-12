@@ -72,10 +72,10 @@ class BookSearch extends React.Component {
     const { query, results } = this.state;
 
     return (
-      <div className="search-books">
+      <section className="search-books" data-page="book-search">
         <input type="search" name="query" placeholder="Search by title or author"
           value={query} onChange={this.updateQuery} />
-        <section className="search-books-results">
+        <section className="container full-width search-books-results">
           {query && (results.length === 0
             ? (<p>No results found for <em>"{query}"</em></p>)
             : (<p>Showing {results.length} books for <em>"{query}"</em></p>))}
@@ -86,7 +86,7 @@ class BookSearch extends React.Component {
             ))}
           </ol>
         </section>
-      </div>
+      </section>
     );
   }
 }

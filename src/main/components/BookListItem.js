@@ -11,7 +11,7 @@ import BookShelfSelector from './BookShelfSelector';
  * @module components/BookListItem
  * @author LonelyPrincess <sara.her.su@gmail.com>
  */
-function BookListItem (props) {
+function BookListItem(props) {
 
   const book = props.book;
 
@@ -36,7 +36,7 @@ function BookListItem (props) {
   return (
     <li className="book">
       <div className="book-top">
-        <Link className="book-top" to={`/details/${book.id}`}>
+        <Link to={`/details/${book.id}`}>
           {isThumbnailAvailable() ? (
             <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
           ) : (
@@ -47,7 +47,6 @@ function BookListItem (props) {
         </Link>
         <BookShelfSelector book={book} onShelfChange={props.onShelfChange} />
       </div>
-
       <div className="book-title">{book.title}</div>
       <div className="book-authors">{getAuthorListString()}</div>
     </li>

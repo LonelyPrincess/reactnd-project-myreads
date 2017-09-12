@@ -344,7 +344,10 @@ main a:focus {
 
 .book-details {
     display: flex;
-    margin-bottom: 1.5em;
+}
+
+.book-details > * {
+    margin-bottom: 2em;
 }
 
 @media screen and (max-width: 560px) {

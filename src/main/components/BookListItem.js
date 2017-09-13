@@ -22,7 +22,7 @@ function BookListItem(props) {
    * @return {string}
    */
   let getAuthorListString = () => {
-    return book.authors ? book.authors.join(", ") : "Unknown";
+    return book.authors ? book.authors.join(', ') : 'Unknown';
   };
 
   /**
@@ -38,7 +38,7 @@ function BookListItem(props) {
       <div className="book-top">
         <Link to={`/details/${book.id}`}>
           {isThumbnailAvailable() ? (
-            <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
+            <div className="book-cover" style={{ backgroundImage: `url('${book.imageLinks.thumbnail}')` }}></div>
           ) : (
             <div className="book-cover">
               <span className="no-image"></span>

@@ -34,7 +34,7 @@ class BooksApp extends React.Component {
   getBookShelf = (bookId) => {
     let foundBook = this.state.books
       .find((book) => book.id === bookId);
-    return foundBook ? foundBook.shelf : "none";
+    return foundBook ? foundBook.shelf : 'none';
   };
 
   /**
@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
       .findIndex((item) => item.id === book.id);
 
     if (bookIndex !== -1) {
-      if (book.shelf === "none") {
+      if (book.shelf === 'none') {
         console.log(`"${book.title}" removed from shelves`);
         books.splice(bookIndex, 1);
       } else {
@@ -104,11 +104,11 @@ class BooksApp extends React.Component {
   render() {
     const currentPath = window.location.pathname;
 
-    const headerClass = currentPath === '/'
-      ? "without-back-button"
+    const headerClass = (currentPath === '/'
+      ? 'without-back-button'
       : (currentPath === '/about'
-        ? "without-info-button"
-        : null);
+        ? 'without-info-button'
+        : null));
 
     return (
       <div className="app">
@@ -122,14 +122,14 @@ class BooksApp extends React.Component {
 
         <main>
           { /* Book list page */ }
-          <Route exact path='/' render={() => (
+          <Route exact path="/" render={() => (
             <BookList
               books={this.state.books}
               onShelfChange={this.moveBookToShelf} />
           )} />
 
           { /* Search books page */ }
-          <Route path='/search/:query?' render={({ match }) => (
+          <Route path="/search/:query?" render={({ match }) => (
             <BookSearch
               query={match.params.query}
               showLoader={this.showLoader}
@@ -138,7 +138,7 @@ class BooksApp extends React.Component {
           )} />
 
           { /* Book details page */ }
-          <Route path='/details/:bookId' render={(props) => (
+          <Route path="/details/:bookId" render={(props) => (
             <BookDetails
               bookId={props.match.params.bookId}
               showLoader={this.showLoader}
@@ -146,7 +146,7 @@ class BooksApp extends React.Component {
           )} />
 
           { /* About page */ }
-          <Route path='/about' component={AppInfo} />
+          <Route path="/about" component={AppInfo} />
         </main>
       </div>
     );

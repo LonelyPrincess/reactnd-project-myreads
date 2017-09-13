@@ -24,7 +24,7 @@ function BookShelfSelector (props) {
 
   return (
     <div className="book-shelf-changer">
-      <select value={book.shelf || "none"} onChange={changeBookShelf}>
+      <select value={book.shelf || 'none'} onChange={changeBookShelf}>
         <option value="placeholder" disabled>Move to...</option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want to Read</option>

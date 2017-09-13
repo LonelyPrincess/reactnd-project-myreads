@@ -11,12 +11,12 @@ import '../../res/styles/Loader.css';
  * @author LonelyPrincess <sara.her.su@gmail.com>
  */
 function Loader () {
-  const message = "Loading";
+  const message = 'Loading';
 
   return (
     <div className="loader-container">
       <div className="loader-body">
-        {message.split("").map((letter, index) => (
+        {message.split('').map((letter, index) => (
           <span key={index}>{letter}</span>
         ))}
       </div>

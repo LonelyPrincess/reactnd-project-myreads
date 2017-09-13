@@ -3,13 +3,13 @@ import React from 'react';
 /**
  * Stateless component to render static information about this application.
  *
- * @module components/About
+ * @module components/AppInfo
  * @author LonelyPrincess <sara.her.su@gmail.com>
  */
-function AppInfo() {
+function AppInfo () {
   const devProfiles = [
-    { "name": "GitHub", "url": "https://www.github.com/LonelyPrincess" },
-    { "name": "LinkedIn", "url": "https://es.linkedin.com/in/sara-hernández-suárez-167013115" }
+    { name: 'GitHub', url: 'https://www.github.com/LonelyPrincess' },
+    { name: 'LinkedIn', url: 'https://es.linkedin.com/in/sara-hernández-suárez-167013115' }
   ];
 
   return (

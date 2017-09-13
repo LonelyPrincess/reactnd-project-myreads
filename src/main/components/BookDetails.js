@@ -34,7 +34,7 @@ class BookDetails extends Component {
         this.props.showLoader(false);
       })
       .catch((error) => {
-        console.warn("Failed to fetch book with id " + this.props.bookId);
+        console.warn(`Failed to fetch book with id ${this.props.bookId}`);
         this.setState({ notFound: true });
       });
   }
@@ -46,7 +46,7 @@ class BookDetails extends Component {
    * @return {string}
    */
   getAuthorListString = () => {
-    return this.state.book.authors ? this.state.book.authors.join(", ") : "Unknown";
+    return this.state.book.authors ? this.state.book.authors.join(', ') : 'Unknown';
   };
 
   /**
@@ -115,7 +115,7 @@ class BookDetails extends Component {
 
         <section className="rating-stars">
           {this.getRatingStarStatus().map((highlightStar, index) => (
-            <i key={index} className={"ico " + (highlightStar ? "ico-star" : "ico-star-outline")}></i>
+            <i key={index} className={`ico ${highlightStar ? 'ico-star' : 'ico-star-outline'}`}></i>
           ))}
           <div className="review-count">(Based on {book.ratingsCount || 0} reviews)</div>
         </section>

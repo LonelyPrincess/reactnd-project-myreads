@@ -10,7 +10,7 @@
 import { searchTerms } from '../constants/SearchTerms';
 import { userToken } from '../constants/MockData';
 
-const api = "https://reactnd-books-api.udacity.com";
+const api = 'https://reactnd-books-api.udacity.com';
 const availableSearchTerms = searchTerms.map((term) => term.toLowerCase());
 
 // Generate a unique token for storing your bookshelf data on the backend server

@@ -14,9 +14,9 @@ import BookShelf from './BookShelf';
 function BookList (props) {
 
   const shelves = [
-    { id: "currentlyReading", name: "Currently Reading" },
-    { id: "wantToRead", name: "Want to Read" },
-    { id: "read", name: "Read" }
+    { id: 'currentlyReading', name: 'Currently Reading' },
+    { id: 'wantToRead', name: 'Want to Read' },
+    { id: 'read', name: 'Read' }
   ];
 
   /**

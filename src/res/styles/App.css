@@ -159,8 +159,8 @@ main a:focus {
 
 .open-search {
     position: fixed;
-    right: 25px;
-    bottom: 25px;
+    right: 2em;
+    bottom: 2em;
 }
 
 .open-search a {
@@ -271,6 +271,10 @@ main a:focus {
     box-sizing: border-box;
     background: #eee;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+a .book-cover {
+    cursor: help;
 }
 
 /* -- Placeholder image -- */

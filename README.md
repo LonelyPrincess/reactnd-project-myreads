@@ -75,6 +75,7 @@ The provided API that serves as a backend for this application does only support
 * [Flaticon](https://www.flaticon.com)
 * [Manda-Pie](http://manda-pie.deviantart.com)
 * [Alfredo Hernández](https://www.flaticon.com/authors/alfredo-hernandez)
+* [Chanut is Industries](https://www.flaticon.com/authors/chanut-is-industries)
 
 #### Development tools
 

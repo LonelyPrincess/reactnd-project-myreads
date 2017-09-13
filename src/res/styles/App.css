@@ -64,7 +64,7 @@ header .ico.back-button {
 
 header .ico.info-button {
     background-position-x: right;
-    background-image: url('../images/icons/show-more-button-with-three-dots.svg');
+    background-image: url('../images/icons/info.svg');
 }
 
 /* -- Content container -- */

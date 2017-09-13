@@ -52,18 +52,18 @@
 /* -- Book colouring -- */
 
 .loader-body > span {
-    background: #91dc5a;
-    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em #91dc5a;
+    background: #20b2aa;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em #20b2aa;
 }
 
 .loader-body > span:nth-child(3n+2) {
-    background: darkgrey;
-    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em darkgrey;
+    background: #696969;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em #696969;
 }
 
 .loader-body > span:nth-child(3n+3) {
-    background: orange;
-    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em orange;
+    background: #ff6347;
+    box-shadow: 0.2em 0.2em 0 0 white, 0.25em 0.25em 0em 0.1em #ff6347;
 }
 
 /* -- Book animation -- */

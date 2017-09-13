@@ -28,7 +28,7 @@ header {
 
     font-size: 2em;
     padding: 0.5em;
-    background: #91dc5a;
+    background: #20b2aa;
     box-shadow: darkgrey 0 0 0.5em;
 
     display: flex;
@@ -87,7 +87,7 @@ header .ico.info-button {
 /* -- Headings -- */
 
 main h2 {
-    color: #91dc5a;
+    color: #20b2aa;
 }
 
 main p {
@@ -101,14 +101,14 @@ main i {
 main a,
 main a:active,
 main a:visited {
-    color: orange;
-    transition: color 1s;
+    color: #ff6347;
+    transition: color 0.5s;
     text-decoration: none;
 }
 
 main a:hover,
 main a:focus {
-    color: orangered;
+    color: #ffa500;
 }
 
 /* -- Generic classes -- */
@@ -168,7 +168,7 @@ main a:focus {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: orange;
+    background: #ff6347;
     background-image: url('../images/icons/magnifying-glass-search.svg');
     background-repeat: no-repeat;
     background-position: center;
@@ -204,7 +204,7 @@ main a:focus {
 }
 
 .search-books-results p em {
-    color: orange;
+    color: #ff6347;
     font-style: normal;
 }
 
@@ -241,12 +241,17 @@ main a:focus {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: dimgray;
+    background: #696969;
     background-image: url('../images/icons/move-down.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 20px;
+    transition: background-color 0.5s;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.book-shelf-changer:hover {
+    background-color: #126b66;
 }
 
 .book-shelf-changer select {
@@ -403,7 +408,7 @@ a .book-cover {
     margin-top: 1em;
     margin-right: 1em;
     color: white;
-    background: #91dc5a;
+    background: #20b2aa;
     font-size: .8em;
     text-transform: lowercase;
     border-radius: 0.5em;
@@ -418,7 +423,7 @@ a .book-cover {
 }
 
 .tags > a:hover {
-    background: orange;
+    background: #ff6347;
 }
 
 .tags > a:nth-child(even) {

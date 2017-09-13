@@ -393,7 +393,7 @@ main a:focus {
     text-align: center;
 }
 
-.tags span {
+.tags > a {
     display: inline-block;
     padding: 0.5em 1em;
     margin-top: 1em;
@@ -403,9 +403,21 @@ main a:focus {
     font-size: .8em;
     text-transform: lowercase;
     border-radius: 0.5em;
+    transition: all 0.5s;
 }
 
-.tags span:nth-child(even) {
+.tags > a:hover,
+.tags > a:focus,
+.tags > a:active,
+.tags > a:visited {
+    color: white;
+}
+
+.tags > a:hover {
+    background: orange;
+}
+
+.tags > a:nth-child(even) {
     background: darkgray;
 }
 

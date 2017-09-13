@@ -14,6 +14,7 @@ import * as BooksAPI from '../utils/BooksAPI';
 class BookSearch extends React.Component {
 
   static propTypes = {
+    query: PropTypes.string,
     showLoader: PropTypes.func.isRequired,
     getBookShelf: PropTypes.func.isRequired,
     onShelfChange: PropTypes.func.isRequired
@@ -25,15 +26,13 @@ class BookSearch extends React.Component {
   };
 
   /**
-   * Handler for the 'change' event of the search input. If its value matches
-   * one of the search terms supported by the provided API, the search service
-   * is called. Otherwise, we'll assign an empty array to the search results.
+   * Updates the value of the query in the component' state. If the new value
+   * matches one of the search terms supported by the provided API, the search
+   * service is called. Otherwise, we'll assign an empty array to the results.
    *
-   * @param {Event} event - Information on the triggered 'change' event,
-   *  including the new value of the search input.
+   * @param {string} query - New value for the query input.
    */
-  updateQuery = (event) => {
-    let query = event.target.value;
+  updateQuery = (query) => {
     this.setState({ query });
 
     query = query.trim();
@@ -65,6 +64,18 @@ class BookSearch extends React.Component {
   };
 
   /**
+   * Handler for 'component did mount' lifecycle event. If the component
+   * receives a query as a prop, we initialize the query property in the
+   * component' state to that value.
+   */
+  componentDidMount() {
+    const initialQuery = this.props.query;
+    if (initialQuery) {
+      this.updateQuery(initialQuery);
+    }
+  }
+
+  /**
    * Returns the view of the component.
    * @returns JSX template for the component.
    */
@@ -74,7 +85,9 @@ class BookSearch extends React.Component {
     return (
       <section className="search-books" data-page="book-search">
         <input type="search" name="query" placeholder="Search by title or author"
-          value={query} onChange={this.updateQuery} />
+          value={query} onChange={(event) => {
+            this.updateQuery(event.target.value);
+          }} />
         <section className="container full-width search-books-results">
           {query && (results.length === 0
             ? (<p>No results found for <em>"{query}"</em></p>)

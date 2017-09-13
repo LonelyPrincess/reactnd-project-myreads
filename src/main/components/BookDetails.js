@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import * as BooksAPI from '../utils/BooksAPI';
 import TroubleReport from './TroubleReport';
@@ -121,7 +122,7 @@ class BookDetails extends Component {
 
         <section className="tags">
           {(book.categories || []).map((category, index) => (
-            <span key={index}>{category}</span>
+            <Link key={index} to={`/search/${category}`}>{category}</Link>
           ))}
         </section>
       </article>

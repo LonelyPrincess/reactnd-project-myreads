@@ -129,8 +129,9 @@ class BooksApp extends React.Component {
           )} />
 
           { /* Search books page */ }
-          <Route path='/search' render={() => (
+          <Route path='/search/:query?' render={({ match }) => (
             <BookSearch
+              query={match.params.query}
               showLoader={this.showLoader}
               getBookShelf={this.getBookShelf}
               onShelfChange={this.moveBookToShelf} />

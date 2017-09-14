@@ -1,260 +1,117 @@
-/* TODO: styles review and refactor needed */
-
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
-
 html, body, .root {
-  height: 100%;
+    height: 100%;
 }
+
 body {
-  line-height: 1.5;
+    line-height: 1.5;
 }
+
 body, .app {
-  background: white;
+    background: white;
 }
 
-/* main page */
+/*   BASE LAYOUT COMPONENTS
+ * ------------------------------------------------------------------------- */
 
-.list-books-title {
-  padding: 10px 0;
-  text-align: center;
-  background: #91dc5a;
-  box-shadow: darkgrey 0 0 0.5em;
+main {
+    padding: 4em 0 2em 0;
 }
 
-.list-books-title h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  margin: 0;
-  color: white;
-}
+/* -- Header -- */
 
-.list-books-content {
-  padding: 0 0 80px;
-  flex: 1;
-}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
 
-.bookshelf {
-  padding: 0 10px 20px;
-}
-
-@media (min-width: 600px) {
-  .bookshelf {
-    padding: 0 20px 40px;
-  }
-}
-
-.bookshelf-title {
-  border-bottom: 1px solid #dedede;
-}
-.bookshelf-books {
-  text-align: center;
-}
-
-.open-search {
-  position: fixed;
-  right: 25px;
-  bottom: 25px;
-}
-.open-search a {
-  display: block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #ffaa50;
-  background-image: url('../images/icons/magnifying-glass-search.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 28px;
-  box-shadow: darkgrey 1px 1px 5px 0;
-  font-size: 0;
-}
-
-/* search page */
-.search-books input[name='query'] {
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 0.75em;
-    font-size: 1.25em;
+    font-size: 2em;
+    padding: 0.5em;
+    background: #20b2aa;
     box-shadow: darkgrey 0 0 0.5em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.search-books-results {
-    padding-top: 1em;
-}
-
-.search-books-results p {
+header h1 {
+    margin: 0;
+    flex-grow: 1;
+    color: white;
+    font-size: 1em;
+    line-height: 1em;
     text-align: center;
 }
 
-.search-books-results p em {
-    color: #ffaa50;
-    font-style: normal;
+header.without-back-button {
+    padding-left: 1.5em;
 }
 
-/* books grid */
-
-.books-grid {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.books-grid li {
-  padding: 10px 15px;
-  text-align: left;
+header.without-info-button {
+    padding-right: 1.5em;
 }
 
-.book {
-  width: 140px;
-}
-.book-title,
-.book-authors {
-  font-size: 0.8em;
-}
-.book-title {
-  margin-top: 10px;
-}
-.book-authors {
-  color: #999;
+header .ico {
+    background-size: 70%;
 }
 
-.book-top {
-  position: relative;
-  height: 200px;
-  display: flex;
-  align-items: flex-end;
+header .ico.back-button {
+    background-position-x: left;
+    background-image: url('../images/icons/go-back-left-arrow.svg');
 }
 
-.book-shelf-changer {
-  position: absolute;
-  right: 0;
-  bottom: -10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: dimgray;
-  background-image: url('../images/icons/move-down.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 20px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-.book-shelf-changer select {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+header .ico.info-button {
+    background-position-x: right;
+    background-image: url('../images/icons/info.svg');
 }
 
-/* book cover */
+/* -- Content container -- */
 
-.book-cover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  background: #eee;
-  width: 130px;
-  height: 180px;
-}
-
-.book-cover-title {
-  padding: 20px 10px 0;
-  text-align: center;
-  font-size: 0.8em;
-}
-
-.book-cover.no-image {
-  position: relative;
-}
-
-.book-cover.no-image::before {
-  content: "";
-  background: transparent;
-  width: 120px;
-  height: 170px;
-  border: dashed 2px black;
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  background-size: 50%;
-  background-position: center;
-  box-sizing: border-box;
-  background-image: url('../images/no-image.svg');
-  opacity: 0.25;
-  background-repeat: no-repeat;
-}
-
-/* -- Book details -- */
-.book-info {
-    padding: 0 1em;
-}
-
-.book-details {
-    padding: 3em 2em;
-    max-width: 750px;
+.container {
+    max-width: 700px;
     box-sizing: border-box;
     margin: auto;
+    padding: 3em 2em;
 }
 
-.book-meta {
-    display: flex;
+.container > :first-child {
+    margin-top: 0;
 }
 
-.book-meta > * {
-    margin-bottom: 1.5em;
+.container.full-width {
+    max-width: none;
 }
 
-.book-details .book-title {
-    margin: 0;
-    font-size: 1em;
-    font-weight: bold;
+/* -- Headings -- */
+
+main h2 {
+    color: #20b2aa;
 }
 
-.book-details ul {
-    font-size: 0.75em;
-    padding-left: 2em;
-    list-style-type: circle;
-}
-
-.book-subtitle {
-    font-size: 0.9em;
-}
-
-.book-details .book-cover {
-    flex-shrink: 0;
-}
-
-.tags {
-    text-align: center;
-    margin: 1.5em;
-}
-
-.tags span {
-    margin-right: 1em;
-    background: #91dc5a;
-    padding: 0.5em 1em;
-    color: white;
-    font-size: .8em;
-    text-transform: lowercase;
-    border-radius: 0.5em;
-}
-
-.tags span:nth-child(even) {
-    background: darkgray;
-}
-
-.book-summary {
+main p {
     text-align: justify;
 }
 
-@media screen and (max-width: 560px) {
-    .book-meta {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+main i {
+    color: darkgrey;
 }
+
+main a,
+main a:active,
+main a:visited {
+    color: #ff6347;
+    transition: color 0.5s;
+    text-decoration: none;
+}
+
+main a:hover,
+main a:focus {
+    color: #ffa500;
+}
+
+/* -- Generic classes -- */
 
 .ico {
     width: 1em;
@@ -264,9 +121,328 @@ body, .app {
     background-size: 100%;
 }
 
-.rating-stars {
+.floating-button {
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+}
+
+.floating-button.left {
+    left: 2em;
+    right: unset;
+}
+
+.floating-button a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 28px;
+    box-shadow: darkgrey 1px 1px 5px 0;
+    font-size: 0;
+}
+
+/*   BOOK LIST & SEARCH
+ * ------------------------------------------------------------------------- */
+
+.books-grid {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.books-grid li {
+    padding: 10px 15px;
+    text-align: left;
+}
+
+/* -- Book shelf -- */
+
+.bookshelf-title {
     text-align: center;
+    padding: 0.1em 0.25em;
+    border-bottom: 1px dashed #dedede;
+}
+
+.bookshelf:first-child .bookshelf-title {
+    margin-top: 0;
+}
+
+.bookshelf-books {
+    text-align: center;
+}
+
+/* -- Search button -- */
+
+.open-search a {
+    background-color: #ff6347;
+    background-image: url('../images/icons/magnifying-glass-search.svg');
+}
+
+/* -- Search input -- */
+
+.search-books {
+    padding-top: 3.25em;
+}
+
+.search-books input[name='query'] {
+    position: fixed;
+    top: 3.2em;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0.75em;
+    font-size: 1.25em;
+    box-shadow: darkgrey 0 0 0.5em;
+}
+
+/* -- Search results -- */
+
+.search-books-results p {
+    text-align: center;
+}
+
+.search-books-results p em {
+    color: #ff6347;
+    font-style: normal;
+}
+
+/*   BOOK LIST ITEMS
+ * ------------------------------------------------------------------------- */
+
+.book {
+    width: 140px;
+    margin-top: 2em;
+    box-sizing: content-box;
+}
+
+/* -- Basic book info -- */
+
+.book-title,
+.book-authors {
+    font-size: 0.8em;
+}
+
+.book-title {
+    margin-top: 10px;
+}
+
+.book-authors {
+    color: #999;
+}
+
+/* -- Book shelf selector -- */
+
+.book-shelf-changer {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #696969;
+    background-image: url('../images/icons/move-down.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    transition: background-color 0.5s;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.book-shelf-changer:hover {
+    background-color: #126b66;
+}
+
+.book-shelf-changer select {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* -- Cover container -- */
+
+.book-top {
+    width: auto;
+    position: relative;
+    display: inline-block;
+    box-sizing: content-box;
+}
+
+.book-cover {
+    width: 130px;
+    height: 180px;
+    box-sizing: border-box;
+    background: #eee;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+a .book-cover {
+    cursor: help;
+}
+
+/* -- Placeholder image -- */
+
+.book-cover .no-image {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+}
+
+.book-cover .no-image::before {
+    content: "";
+    background: transparent;
+    width: 120px;
+    height: 170px;
+    border: dashed 2px black;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    opacity: 0.25;
+    background-size: 50%;
+    background-position: center;
+    background-image: url('../images/no-image.svg');
+    background-repeat: no-repeat;
+}
+
+/* -- Shy cat -- */
+
+.book-cover {
+    position: relative;
+}
+
+.book-cover::before {
+    content: '';
+    width: 2.5em;
+    height: 2.5em;
+    position: absolute;
+    left: 0;
+    top: -2.5em;
+    background: no-repeat;
+    background-position-y: 2.5em;
+    background-image: url('../images/cat.svg');
+    transition: background-position-y 1s;
+}
+
+.book-cover:hover::before {
+    background-position-y: 0.5em;
+}
+
+.book-cover::after {
+    content: 'Meow!';
+    height: 1em;
+    position: absolute;
+    top: -1.75em;
+    left: 2.75em;
+    opacity: 0;
+    color: darkgrey;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    transition: opacity 1s;
+}
+
+.book-cover:hover::after {
+    opacity: 1;
+}
+
+/*   BOOK DETAILS
+ * ------------------------------------------------------------------------- */
+
+.book-details {
+    display: flex;
+}
+
+.book-details > * {
+    margin-bottom: 2em;
+}
+
+@media screen and (max-width: 560px) {
+    .book-details {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* -- Basic book info -- */
+
+.book-details .book-info {
+    padding: 0 1.25em;
+}
+
+.book-details .book-info .book-title {
+    margin: 0;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.book-details .book-info ul {
+    font-size: 0.75em;
+    padding-left: 2em;
+    list-style-type: circle;
+}
+
+.book-details .book-info .book-subtitle {
+    font-size: 0.9em;
+}
+
+.book-details .book-top {
+    flex-shrink: 0;
+}
+
+.book-summary {
+    text-align: justify;
+}
+
+/* -- Book tags -- */
+
+.tags {
+    text-align: center;
+}
+
+.tags > a {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    margin-right: 1em;
+    color: white;
+    background: #20b2aa;
+    font-size: .8em;
+    text-transform: lowercase;
+    border-radius: 0.5em;
+    transition: all 0.5s;
+}
+
+.tags > a:hover,
+.tags > a:focus,
+.tags > a:active,
+.tags > a:visited {
+    color: white;
+}
+
+.tags > a:hover {
+    background: #ff6347;
+}
+
+.tags > a:nth-child(even) {
+    background: darkgray;
+}
+
+/* -- Book rating -- */
+
+.rating-stars {
     margin: 2em 0;
+    text-align: center;
 }
 
 .rating-stars > .ico {
@@ -278,11 +454,11 @@ body, .app {
 }
 
 .ico-star {
-    background-image: url('../images/icons/star-empty.svg');
+    background-image: url('../images/icons/star.svg');
 }
 
-.ico-star.fill {
-    background-image: url('../images/icons/star-filled.svg');
+.ico-star-outline {
+    background-image: url('../images/icons/star-outline.svg');
 }
 
 .rating-stars .review-count {
@@ -291,136 +467,41 @@ body, .app {
     color: darkgray;
 }
 
-/* -- Easter egg -- */
+/*   TROUBLE REPORT
+ * ------------------------------------------------------------------------- */
 
-.book-cover {
-    position: relative;
-}
-
-.book-cover::before {
-    content: '';
-    left: 0;
-    top: -2.5em;
-    position: absolute;
-    width: 2.5em;
-    height: 2.5em;
-    background: no-repeat;
-    background-position-y: 2.5em;
-    background-image: url('../images/cat.svg');
-    transition: all 1s;
-}
-
-.book-cover:hover::before {
-    background-position-y: 0.5em;
-    transition: all 1s;
-}
-
-.book-cover::after {
-    content: 'Meow!';
-    left: 2.75em;
-    top: -1.75em;
-    opacity: 0;
-    font-size: 1em;
-    position: absolute;
-    color: darkgrey;
-    font-family: 'Montserrat', sans-serif;
-    height: 1em;
-    transition: all 1s;
-}
-
-.book-cover:hover::after {
-    opacity: 1;
-    transition: all 1s;
-}
-
-/* -- Other styles -- */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background: #91dc5a;
-    box-shadow: darkgrey 0 0 0.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    padding: 0.5em;
-}
-
-header h1 {
-    color: white;
-    font-size: 1em;
-    line-height: 1em;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    margin: 0;
-    text-align: center;
-    flex-grow: 1;
-}
-
-header.without-back-button {
-    padding-left: 1.5em;
-}
-
-header .ico {
-    color: transparent;
-    overflow: hidden;
-    background-size: 70%;
-}
-
-header .ico.back-button {
-    background-position-x: left;
-    background-image: url('../images/icons/go-back-left-arrow.svg');
-}
-
-header .ico.menu-button {
-    background-position-x: right;
-    background-image: url('../images/icons/show-more-button-with-three-dots.svg');
-}
-
-main {
-    padding: 4em 0 2em 0;
-}
-
-.book-details .book-top {
-    height: auto;
-}
-
-.book-details .book-shelf-changer {
-    right: -10px;
-}
-
-/* -- Error message -- */
-.error-message {
+[data-page='trouble-report'] {
     padding: 2em;
+}
+
+[data-page='trouble-report'] > * {
     text-align: center;
 }
 
-.error-message h1 {
+[data-page='trouble-report'] h2 {
     color: darkgrey;
 }
 
-.error-message .crying-face {
+[data-page='trouble-report'] .crying-face {
+    opacity: 0.1;
     width: 150px;
     height: 150px;
-    opacity: 0.1;
     background-image: url('../images/crying.svg');
     background-size: contain;
-    bottom: 0;
-    right: 0;
     margin: 2em auto;
-    /*animation: darken 1s linear 0s infinite alternate;*/
 }
 
-@keyframes darken {
-    from    { opacity: 0.1; }
-    to      { opacity: 0.25; }
+/*   ABOUT THE APP
+ * ------------------------------------------------------------------------- */
+
+[data-page='about'] > section:not(:first-child) {
+    margin-top: 2.5em;
 }
 
-.container {
-    max-width: 750px;
-    box-sizing: border-box;
-    margin: auto;
+[data-page='about'] ul li {
+    line-height: 2;
+}
+
+[data-page='about'] h2:first-child {
+    margin: 0;
 }

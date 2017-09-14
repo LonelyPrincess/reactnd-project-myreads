@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 
 import Loader from './components/Loader';
+import AppInfo from './components/AppInfo';
 import * as BooksAPI from './utils/BooksAPI';
-import BookShelf from './components/BookShelf';
+import BookList from './components/BookList';
 import BookSearch from './components/BookSearch';
 import BookDetails from './components/BookDetails';
 
@@ -26,16 +27,6 @@ class BooksApp extends React.Component {
   };
 
   /**
-   * Obtain all of the user's book that belong to a certain shelf.
-   * @param {string} shelf
-   * @returns {array} List of books that belong to the selected shelf.
-   */
-  getBooksFromShelf = (shelf) => {
-    return this.state.books
-      .filter((book) => book.shelf === shelf)
-  };
-
-  /**
    * Obtains the shelf name to which a certain book belongs to.
    * @param {string} bookId
    * @returns {Event} string - Name of the shelf for the selected book.
@@ -43,7 +34,7 @@ class BooksApp extends React.Component {
   getBookShelf = (bookId) => {
     let foundBook = this.state.books
       .find((book) => book.id === bookId);
-    return foundBook ? foundBook.shelf : "none";
+    return foundBook ? foundBook.shelf : 'none';
   };
 
   /**
@@ -60,13 +51,13 @@ class BooksApp extends React.Component {
    * component's state.
    * @param {Object} book - Book instance that was moved to a new shelf.
    */
-  udateBookStatus = (book) => {
-    const bookIndex = this.state.books
+  updateBookStatus = (book) => {
+    const books = this.state.books;
+    const bookIndex = books
       .findIndex((item) => item.id === book.id);
 
-    let books = this.state.books;
     if (bookIndex !== -1) {
-      if (book.shelf === "none") {
+      if (book.shelf === 'none') {
         console.log(`"${book.title}" removed from shelves`);
         books.splice(bookIndex, 1);
       } else {
@@ -79,6 +70,20 @@ class BooksApp extends React.Component {
     }
 
     this.setState({ books });
+  };
+
+  /**
+   * Moves a book to a new the shelf by calling the update method in the API.
+   * @param {Object} book - Book instance that was moved to a new shelf.
+   */
+  moveBookToShelf = (book, shelf) => {
+    this.showLoader(true);
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        book.shelf = shelf;
+        this.updateBookStatus(book);
+        this.showLoader(false);
+      });
   };
 
   /**
@@ -99,60 +104,52 @@ class BooksApp extends React.Component {
   render() {
     const currentPath = window.location.pathname;
 
+    const headerClass = (currentPath === '/'
+      ? 'without-back-button'
+      : (currentPath === '/about'
+        ? 'without-info-button'
+        : null));
+
     return (
       <div className="app">
         {this.state.showLoader && (<Loader />)}
 
-        <header className={currentPath === '/' ? "without-back-button" : null}>
-          {currentPath !== '/' && (<Link className="ico back-button" to="/">Go back</Link>)}
+        <header className={headerClass}>
+          {currentPath !== '/' && (<Link className="ico back-button" to="/"></Link>)}
           <h1>MyReads</h1>
-          <i className="ico menu-button"></i>
+          {currentPath !== '/about' && (<Link className="ico info-button" to="/about"></Link>)}
         </header>
-        <main>
 
-          { /* Book list page */}
-          <Route exact path='/' render={() => (
-            <div className="list-books">
-              <div className="list-books-content">
-                <div>
-                  <BookShelf title="Currently Reading"
-                    showLoader={this.showLoader}
-                    onBookUpdated={this.udateBookStatus}
-                    books={this.getBooksFromShelf("currentlyReading")} />
-                  <BookShelf title="Want to Read"
-                    showLoader={this.showLoader}
-                    onBookUpdated={this.udateBookStatus}
-                    books={this.getBooksFromShelf("wantToRead")} />
-                  <BookShelf title="Read"
-                    showLoader={this.showLoader}
-                    onBookUpdated={this.udateBookStatus}
-                    books={this.getBooksFromShelf("read")} />
-                </div>
-              </div>
-              <div className="open-search">
-                <Link to="/search">Add a book</Link>
-              </div>
-            </div>
+        <main>
+          { /* Book list page */ }
+          <Route exact path="/" render={() => (
+            <BookList
+              books={this.state.books}
+              onShelfChange={this.moveBookToShelf} />
           )} />
 
-          { /* Search books page */}
-          <Route path='/search' render={() => (
+          { /* Search books page */ }
+          <Route path="/search/:query?" render={({ match }) => (
             <BookSearch
+              query={match.params.query}
               showLoader={this.showLoader}
               getBookShelf={this.getBookShelf}
-              onBookUpdated={this.udateBookStatus} />
+              onShelfChange={this.moveBookToShelf} />
           )} />
 
-          { /* Book details page */}
-          <Route path='/details/:bookId' render={(props) => (
+          { /* Book details page */ }
+          <Route path="/details/:bookId" render={(props) => (
             <BookDetails
               bookId={props.match.params.bookId}
               showLoader={this.showLoader}
-              onBookUpdated={this.udateBookStatus} />
+              onShelfChange={this.moveBookToShelf} />
           )} />
+
+          { /* About page */ }
+          <Route path="/about" component={AppInfo} />
         </main>
       </div>
-    )
+    );
   }
 }
 

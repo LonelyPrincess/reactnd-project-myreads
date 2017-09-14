@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 
 import BookListItem from './BookListItem';
 
+/**
+ * Stateless component to render an user shelf, displaying both its title and
+ * the books that the user has put into it.
+ *
+ * @module components/BookList
+ * @author LonelyPrincess <sara.her.su@gmail.com>
+ */
 function BookShelf (props) {
   return (
     <div className="bookshelf">
@@ -11,7 +18,7 @@ function BookShelf (props) {
         <ol className="books-grid">
           {props.books.map((book) => (
             <BookListItem key={book.id} book={book}
-              onBookUpdated={props.onBookUpdated} showLoader={props.showLoader} />
+              onShelfChange={props.onShelfChange} />
           ))}
         </ol>
       </div>
@@ -22,8 +29,7 @@ function BookShelf (props) {
 BookShelf.propTypes = {
   title: PropTypes.string.isRequired,
   books: PropTypes.array.isRequired,
-  showLoader: PropTypes.func.isRequired,
-  onBookUpdated: PropTypes.func.isRequired
+  onShelfChange: PropTypes.func.isRequired
 };
 
 export default BookShelf;

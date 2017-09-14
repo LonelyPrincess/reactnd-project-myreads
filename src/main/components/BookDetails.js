@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import * as BooksAPI from '../utils/BooksAPI';
-
-// TODO: create new component with common methods to this and 'BookListItem', so we don't have duplicate code
+import TroubleReport from './TroubleReport';
+import BookShelfSelector from './BookShelfSelector';
 
 /**
  * Component used to render detailed information on a book.
@@ -21,7 +22,7 @@ class BookDetails extends Component {
   static propTypes = {
     bookId: PropTypes.string.isRequired,
     showLoader: PropTypes.func.isRequired,
-    onBookUpdated: PropTypes.func.isRequired
+    onShelfChange: PropTypes.func.isRequired
   };
 
   // Retrieve books from API once component is inserted in DOM
@@ -33,28 +34,10 @@ class BookDetails extends Component {
         this.props.showLoader(false);
       })
       .catch((error) => {
-        console.warn("Failed to fetch book with id " + this.props.bookId);
+        console.warn(`Failed to fetch book with id ${this.props.bookId}`);
         this.setState({ notFound: true });
       });
   }
-
-  /**
-   * Handler for the 'change' event of the 'select' tag that allows the user to
-   * move the book to another shelf. Updates the book' status on the server.
-   * @param {Event} event - Contains information on the selected shelf.
-   */
-  updateBookShelf = (event) => {
-    const shelf = event.target.value;
-    const book = this.state.book;
-
-    this.props.showLoader(true);
-    BooksAPI.update(book, shelf)
-      .then(() => {
-        book.shelf = shelf;
-        this.props.onBookUpdated(book);
-        this.props.showLoader(false);
-      });
-  };
 
   /**
    * Creates a string with author names separated by commas based on the book's
@@ -63,7 +46,7 @@ class BookDetails extends Component {
    * @return {string}
    */
   getAuthorListString = () => {
-    return this.state.book.authors ? this.state.book.authors.join(", ") : "Unknown";
+    return this.state.book.authors ? this.state.book.authors.join(', ') : 'Unknown';
   };
 
   /**
@@ -74,46 +57,47 @@ class BookDetails extends Component {
     return (this.state.book.imageLinks && this.state.book.imageLinks.thumbnail);
   };
 
+  /**
+   * Obtains an array stating which of the rating stars should be highlighted
+   * depending on the book's average rating.
+   * @return {array} - Array with the status for each of the rating stars.
+   */
+  getRatingStarStatus = () => {
+    const avgRating = this.state.book.averageRating || 0;
+
+    let highlightStar = [];
+    for (let i = 0; i < 5; i++) {
+      highlightStar.push(avgRating > i);
+    }
+
+    return highlightStar;
+  };
+
   render() {
     const { book, notFound } = this.state;
 
-    /* TODO:
-      - header and main containers must be moved to the app component, as not to duplicate code
-      - error page must become an independant component receiving two props: title and error message
-    */
     if (!book) {
       if (!notFound) {
         return null;
       }
 
       return (
-
-        <section className="container error-message">
-          <h1>Houston, we have a problem!</h1>
-          <p>Sorry! We couldn't find the book you were looking for!</p>
-          <div className="crying-face"></div>
-        </section>
+        <TroubleReport message="Sorry! We couldn't find the book you were looking for!" />
       );
     }
 
     return (
-      <article className="book-details">
-        <section className="book-meta">
+      <article className="container" data-page="book-details">
+        <section className="book-details">
           <div className="book-top">
             {this.isThumbnailAvailable() ? (
               <div className="book-cover" style={{ backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}></div>
             ) : (
-                <div className="book-cover no-image"></div>
-              )}
-            <div className="book-shelf-changer">
-              <select value={book.shelf || "none"} onChange={this.updateBookShelf}>
-                <option value="placeholder" disabled>Move to...</option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
-              </select>
-            </div>
+              <div className="book-cover">
+                <span className="no-image"></span>
+              </div>
+            )}
+            <BookShelfSelector book={book} onShelfChange={this.props.onShelfChange} />
           </div>
           <div className="book-info">
             <div className="book-title">{book.title}</div>
@@ -122,7 +106,7 @@ class BookDetails extends Component {
 
             <ul>
               <li>Number of pages: {book.pageCount}</li>
-              <li>Published by "{book.publisher}" on {book.publishedDate}</li>
+              <li>Published by {book.publisher || 'an unknown entity'} on {book.publishedDate || 'a certain date in history'}</li>
             </ul>
           </div>
         </section>
@@ -130,17 +114,15 @@ class BookDetails extends Component {
         <section className="book-summary">{book.description}</section>
 
         <section className="rating-stars">
-          <i className={"ico ico-star" + (book.averageRating ? " fill" : "")}></i>
-          <i className={"ico ico-star" + (book.averageRating > 1 ? " fill" : "")}></i>
-          <i className={"ico ico-star" + (book.averageRating > 2 ? " fill" : "")}></i>
-          <i className={"ico ico-star" + (book.averageRating > 3 ? " fill" : "")}></i>
-          <i className={"ico ico-star" + (book.averageRating > 4 ? " fill" : "")}></i>
+          {this.getRatingStarStatus().map((highlightStar, index) => (
+            <i key={index} className={`ico ${highlightStar ? 'ico-star' : 'ico-star-outline'}`}></i>
+          ))}
           <div className="review-count">(Based on {book.ratingsCount || 0} reviews)</div>
         </section>
 
         <section className="tags">
           {(book.categories || []).map((category, index) => (
-            <span key={index}>{category}</span>
+            <Link key={index} to={`/search/${category}`}>{category}</Link>
           ))}
         </section>
       </article>

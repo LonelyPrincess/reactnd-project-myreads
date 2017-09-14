@@ -121,6 +121,29 @@ main a:focus {
     background-size: 100%;
 }
 
+.floating-button {
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+}
+
+.floating-button.left {
+    left: 2em;
+    right: unset;
+}
+
+.floating-button a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 28px;
+    box-shadow: darkgrey 1px 1px 5px 0;
+    font-size: 0;
+}
+
 /*   BOOK LIST & SEARCH
  * ------------------------------------------------------------------------- */
 
@@ -157,24 +180,9 @@ main a:focus {
 
 /* -- Search button -- */
 
-.open-search {
-    position: fixed;
-    right: 2em;
-    bottom: 2em;
-}
-
 .open-search a {
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #ff6347;
+    background-color: #ff6347;
     background-image: url('../images/icons/magnifying-glass-search.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 28px;
-    box-shadow: darkgrey 1px 1px 5px 0;
-    font-size: 0;
 }
 
 /* -- Search input -- */

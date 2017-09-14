@@ -40,7 +40,7 @@ function BookList (props) {
               books={getBooksFromShelf(shelf.id)} />
           ))}
       </div>
-      <div className="open-search">
+      <div className="floating-button open-search">
         <Link to="/search">Add a book</Link>
       </div>
     </section>

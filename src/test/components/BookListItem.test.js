@@ -5,6 +5,8 @@ import { getComponentWrapper } from '../utils/TestUtils';
 
 import BookListItem from '../../main/components/BookListItem';
 
+import data from '../../res/data/ws-get-book.json';
+
 /**
  * Unit tests for the book list item component.
  *
@@ -13,32 +15,23 @@ import BookListItem from '../../main/components/BookListItem';
  */
 describe('\n --- TESTS FOR BOOK LIST ITEM COMPONENT --- \n', () => {
 
-  const book = {
-    "title": "Learning Web Development with React and Bootstrap",
-    "authors": [
-        "Harmeet Singh",
-        "Mehul Bhatt"
-    ],
-    "imageLinks": {
-      "smallThumbnail": "http://books.google.com/books/content?id=sJf1vQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-      "thumbnail": "http://books.google.com/books/content?id=sJf1vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-    },
-    "id": "sJf1vQAACAAJ",
-    "shelf": "currentlyReading"
-  };
+  const book = data.book;
 
   it('render book data', () => {
     const wrapper = getComponentWrapper(
-        <BookListItem book={book} onShelfChange={() => null} />
+      <BookListItem book={book} onShelfChange={() => null} />
     );
+
     expect(wrapper.find('.book-title').text())
-      .toBe('Learning Web Development with React and Bootstrap');
+      .toBe(book.title);
     expect(wrapper.find('.book-authors').text())
-      .toBe('Harmeet Singh, Mehul Bhatt');
+      .toBe(book.authors.join(', '));
     expect(wrapper.find('a').prop('href'))
       .toBe(`/details/${book.id}`);
     expect(wrapper.find('.book-cover').prop('style').backgroundImage)
       .toBe(`url('${book.imageLinks.thumbnail}')`);
+    expect(wrapper.find('select').prop('value'))
+      .toBe(book.shelf);
   });
 
 });

@@ -8,7 +8,12 @@ import App from '../main/App';
 import BookSearch from '../main/components/BookSearch';
 import BookListItem from '../main/components/BookListItem';
 
-
+/**
+ * Unit tests for the app component.
+ *
+ * @module test/App
+ * @author LonelyPrincess <sara.her.su@gmail.com>
+ */
 describe('\n --- TESTS FOR APP COMPONENT --- \n', () => {
 
   it('renders without crashing', () => {
@@ -31,11 +36,4 @@ describe('\n --- TESTS FOR APP COMPONENT --- \n', () => {
     expect(header.find('.back-button')).toHaveLength(0);
   });
 
-  it('if a search term is included as a path param, input must be set to that value', () => {
-    const wrapper = getAppWrapper('/search/term');
-    const search = wrapper.find(BookSearch);
-    expect(search).toHaveLength(1);
-    const query = search.find('[name="query"]').props().value;
-    expect(query).toBe('term');
-  });
 });

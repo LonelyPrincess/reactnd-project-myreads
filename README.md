@@ -1,6 +1,9 @@
 # React Fundamentals: MyReads
 
-This is the final project for the first module of the [Udacity's React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019), *React Fundamentals*.
+[![Build Status](https://travis-ci.org/LonelyPrincess/reactnd-project-myreads.svg?branch=master)](https://travis-ci.org/LonelyPrincess/reactnd-project-myreads)
+[![Inline docs](http://inch-ci.org/github/LonelyPrincess/reactnd-project-myreads.svg?branch=master&style=shields)](http://inch-ci.org/github/LonelyPrincess/reactnd-project-myreads)
+
+This is the final project for the first module of the [Udacity's React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019), "React Fundamentals".
 
 ## Project description
 
@@ -16,56 +19,80 @@ The user will be able to change a book status anytime, as well as add new titles
 
 ### Pre-requisites
 
-Before being able to run this application, you must have [Node Package Manager](https://nodejs.org/en/) installed in your system.
+Before being able to run this application, you must have [Node Package Manager](https://nodejs.org/en/) or [Yarn](https://yarnpkg.com/) installed on your system.
 
 ### Get the application running
 
 If you have all the required software installed, the first step to run this application is to install all of its dependencies and start the application's server.
 
-To do so, you must open a console and, once into the project's root directory, run the following commands:
+To do so, you must open a console and, once located into the project's root directory, run the following commands:
 
 ```bash
-npm install     # Install all project's dependencies
-npm start       # Run application's server
+# Install all project's dependencies
+> npm install
+
+# Run application's server
+> npm start
 ```
 
-When the previous command has finished, the console output should have told you at which URL is the application running.
+These instructions assume that you've installed [Node Package Manager](https://nodejs.org/en/). If you are using [Yarn](https://yarnpkg.com/) instead, just replace `npm` with `yarn` in the commands listed above.
+
+After running the `start` command, the console output should tell you at which URL is the application running.
 
 ```bash
 The app is running at:
 
-  http://localhost:3000/    # URL where the app is running
+  # URL where the app is running
+  http://localhost:3000/
 ```
 
 Now you only have to enter that URL into your favourite browser, and that's it! You're all set!
 
 ## Project structure
 
+The project folder structure is as follows:
+
 ```bash
-├── README.md # The file you're currently seeing
-├── SEARCH_TERMS.md # Search terms supported by the book search feature
-├── package.json # npm package manager file
-├── public # Public resources that will accessible from outside of the app
-    ├── favicon.ico
-    ├── index.html
+├── public
 └── src
-    ├── main # JavaScript files where all of the functionality is implemented
-    ├── res # Resources used by the application
+    ├── main
+    ├── res
+        ├── data
         ├── images
         ├── stylesheets
-    ├── test # Code for unit testing is wrapped into this folder
+    ├── test
 ```
+
+Two folders can be found at the project's root path, being the `src` the most important one as it is the place where all of the application source code will live. The other one, `public`, will contain public resources that can be directly accessed via a direct request to the server, such as the application _favicon_ and the _index.html_ file.
+
+The `src` directory is divided in three parts, each one with a different purpose:
+
+- `main` - As the name implies, this folder contains the main code for the project, being it the wrapper for all the files where the app's functionality is implemented.
+
+- `res` - Resources to be used by the application, including images, stylesheets or mock data files that can be used for testing purposes.
+
+- `test` - Code for unit testing is wrapped into this folder.
 
 ## Aspects to consider
 
-### Project status
-This project is still **in development**, meaning some of the features may not work as expected. Missing features and bug fixes will be eventually commited to this repository.
-
-[![Inline docs](http://inch-ci.org/github/LonelyPrincess/reactnd-project-myreads.svg?branch=master&style=shields)](http://inch-ci.org/github/LonelyPrincess/reactnd-project-myreads)
-[![Build Status](https://travis-ci.org/LonelyPrincess/reactnd-project-myreads.svg?branch=master)](https://travis-ci.org/LonelyPrincess/reactnd-project-myreads)
-
 ### Available search terms
-The provided API that serves as a backend for this application does only support a fixed set of search terms. The search page will _not_ return any results for queries that doesn't match any of the search terms specified in [this list](SEARCH_TERMS.md).
+
+The provided API that serves as a backend for this application does only support a fixed set of search terms. The search page will _not_ return any results for queries that don't match any of the search terms specified in [this list](SEARCH_TERMS.md).
+
+### Project status
+
+Although the specified criteria for passing the first project at the [Udacity's React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019) should be met by now, this repository will remain open to new features and improvements. Feel free to [open a new issue](https://github.com/LonelyPrincess/reactnd-project-myreads/issues/new) if you have any suggestion or come across a bug that should eventually be fixed.
+
+### Browser support
+
+This application has been tested in the following browsers:
+
+* Google Chrome (~60.0.3112.113)
+* Firefox Developer Edition (~56.0b11)
+
+It's possible that _it might present unexpected behaviours or rendering problems in older browsers_ that have no support for the latest ES2015, HTML5 or CSS3 features.
+
+Since Chrome was one of the main tools used while developing and debugging this application, it's highly recommended to run it in a recent version of Google Chrome.
 
 ## Credits
 
@@ -87,3 +114,7 @@ The provided API that serves as a backend for this application does only support
 #### Useful documentation
 
 * [Use JSDoc](http://usejsdoc.org/)
+* [Jest Docs](https://facebook.github.io/jest/docs/en/getting-started.html)
+* [Enzyme Docs](http://airbnb.io/enzyme/index.html)
+* [Testing React Apps](https://facebook.github.io/jest/docs/en/tutorial-react.html)
+* [Testing React Router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/testing.md)

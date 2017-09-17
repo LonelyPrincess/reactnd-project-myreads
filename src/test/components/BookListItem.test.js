@@ -11,7 +11,7 @@ import data from '../../res/data/ws-get-book.json';
  * Unit tests for the book list item component.
  *
  * @module test/components/BookListItem
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 describe('\n --- TESTS FOR BOOK LIST ITEM COMPONENT --- \n', () => {
 

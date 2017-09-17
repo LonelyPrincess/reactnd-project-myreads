@@ -8,7 +8,7 @@ import '../../res/styles/Loader.css';
  * while the browser receives a response from the external server.
  *
  * @module components/Loader
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 function Loader () {
   const message = 'Loading';

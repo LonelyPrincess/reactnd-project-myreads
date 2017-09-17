@@ -9,7 +9,7 @@ import BookShelfSelector from './BookShelfSelector';
  * its most relevant information: title, authors and a thumbnail image.
  *
  * @module components/BookListItem
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  * @param {object} props - Component props.
  * @param {object} props.book - Book to display.
  * @param {function} props.onShelfChange - Handler function to trigger when a

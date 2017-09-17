@@ -18,7 +18,7 @@ import '../res/styles/App.css';
  * available in the render method of this base component.
  *
  * @module BooksApp
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 class BooksApp extends React.Component {
   state = {

@@ -10,7 +10,7 @@ import BookShelfSelector from './BookShelfSelector';
  * Component used to render detailed information on a book.
  *
  * @module components/BookDetails
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 class BookDetails extends Component {
 

@@ -4,7 +4,7 @@
  *
  * @module utils/BooksAPI
  * @author Richard Kalehoff <richardkalehoff@gmail.com>
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 
 import { searchTerms } from '../constants/SearchTerms';

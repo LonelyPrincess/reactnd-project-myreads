@@ -3,7 +3,7 @@
  * different test files.
  *
  * @module test/utils/TestUtils
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 
 import React from 'react';

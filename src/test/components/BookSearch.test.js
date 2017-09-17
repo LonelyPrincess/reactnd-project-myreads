@@ -8,7 +8,7 @@ import BookSearch from '../../main/components/BookSearch';
  * Unit tests for the book search component.
  *
  * @module test/components/BookSearch
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 describe('\n --- TESTS FOR BOOK SEARCH COMPONENT --- \n', () => {
 

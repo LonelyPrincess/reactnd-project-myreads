@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
  * to move a book from one shelf to another.
  *
  * @module components/BookShelfSelector
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  * @param {object} props - Component props.
  * @param {object} props.book - Book to which the selector will apply.
  * @param {function} props.onShelfChange - Handler function to trigger when a

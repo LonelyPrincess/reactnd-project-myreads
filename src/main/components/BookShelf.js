@@ -8,7 +8,7 @@ import BookListItem from './BookListItem';
  * the books that the user has put into it.
  *
  * @module components/BookShelf
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  * @param {object} props - Component props.
  * @param {string} props.title - Shelf name.
  * @param {array} props.books - List of books to display on the shelf.

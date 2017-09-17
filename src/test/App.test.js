@@ -12,7 +12,7 @@ import BookListItem from '../main/components/BookListItem';
  * Unit tests for the app component.
  *
  * @module test/App
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 describe('\n --- TESTS FOR APP COMPONENT --- \n', () => {
 

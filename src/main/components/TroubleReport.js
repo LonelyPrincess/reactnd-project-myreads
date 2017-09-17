@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
  * specified, a default message will be shown.
  *
  * @module components/TroubleReport
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  * @param {object} props - Component props.
  * @param {string} [props.title] - Error title.
  * @param {string} [props.message] - Detailed error message.

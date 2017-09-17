@@ -4,7 +4,7 @@ import React from 'react';
  * Stateless component to render static information about this application.
  *
  * @module components/AppInfo
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 function AppInfo () {
   const devProfiles = [

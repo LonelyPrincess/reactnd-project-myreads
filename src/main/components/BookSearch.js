@@ -9,7 +9,7 @@ import * as BooksAPI from '../utils/BooksAPI';
  * list of the books returned by the API after calling the search service.
  *
  * @module components/BookSearch
- * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @author Sara Hernández <sara.her.su@gmail.com>
  */
 class BookSearch extends React.Component {
 

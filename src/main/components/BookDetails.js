@@ -25,7 +25,9 @@ class BookDetails extends Component {
     onShelfChange: PropTypes.func.isRequired
   };
 
-  // Retrieve books from API once component is inserted in DOM
+  /**
+   * Retrieve books from API once the component is inserted in DOM.
+   */
   componentDidMount() {
     this.props.showLoader(true);
     BooksAPI.get(this.props.bookId)

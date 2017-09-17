@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
  *
  * @module components/TroubleReport
  * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @param {object} props - Component props.
+ * @param {string} [props.title] - Error title.
+ * @param {string} [props.message] - Detailed error message.
  */
 function TroubleReport (props) {
   return (

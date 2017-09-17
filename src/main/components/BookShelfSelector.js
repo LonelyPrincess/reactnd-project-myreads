@@ -7,6 +7,10 @@ import PropTypes from 'prop-types';
  *
  * @module components/BookShelfSelector
  * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @param {object} props - Component props.
+ * @param {object} props.book - Book to which the selector will apply.
+ * @param {function} props.onShelfChange - Handler function to trigger when a
+ *  book is moved to another shelf.
  */
 function BookShelfSelector (props) {
 

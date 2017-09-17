@@ -10,6 +10,10 @@ import BookShelf from './BookShelf';
  *
  * @module components/BookList
  * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @param {object} props - Component props.
+ * @param {array} props.books - List of books to display on the list.
+ * @param {function} props.onShelfChange - Handler function to trigger when a
+ *  book is moved to another shelf.
  */
 function BookList (props) {
 

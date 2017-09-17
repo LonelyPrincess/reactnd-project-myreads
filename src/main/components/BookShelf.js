@@ -7,8 +7,13 @@ import BookListItem from './BookListItem';
  * Stateless component to render an user shelf, displaying both its title and
  * the books that the user has put into it.
  *
- * @module components/BookList
+ * @module components/BookShelf
  * @author LonelyPrincess <sara.her.su@gmail.com>
+ * @param {object} props - Component props.
+ * @param {string} props.title - Shelf name.
+ * @param {array} props.books - List of books to display on the shelf.
+ * @param {function} props.onShelfChange - Handler function to trigger when a
+ *  book is moved to another shelf.
  */
 function BookShelf (props) {
   return (

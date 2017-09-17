@@ -94,27 +94,6 @@ It's possible that _it might present unexpected behaviours or rendering problems
 
 Since Chrome was one of the main tools used while developing and debugging this application, it's highly recommended to run it in a recent version of Google Chrome.
 
-## Credits
+### Credits
 
-#### Image resources
-
-* [Freepik](http://www.freepik.com)
-* [Flaticon](https://www.flaticon.com)
-* [Manda-Pie](http://manda-pie.deviantart.com)
-* [Alfredo Hernández](https://www.flaticon.com/authors/alfredo-hernandez)
-* [Chanut is Industries](https://www.flaticon.com/authors/chanut-is-industries)
-
-#### Development tools
-
-* [React.js](https://facebook.github.io/react/)
-* [Node Package Manager](https://nodejs.org/en/)
-* [Travis CI](https://travis-ci.org/)
-* [Jest](https://facebook.github.io/jest/)
-
-#### Useful documentation
-
-* [Use JSDoc](http://usejsdoc.org/)
-* [Jest Docs](https://facebook.github.io/jest/docs/en/getting-started.html)
-* [Enzyme Docs](http://airbnb.io/enzyme/index.html)
-* [Testing React Apps](https://facebook.github.io/jest/docs/en/tutorial-react.html)
-* [Testing React Router](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/testing.md)
+If you need information of the resources used on this project, take a look at [this file](CREDITS.md). This includes links to some useful documentation resources, tools involved in the development process and credits to the authors of the icons used throughout the application.

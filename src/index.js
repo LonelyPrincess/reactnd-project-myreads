@@ -6,6 +6,8 @@ import App from './main/App'
 import './res/styles/index.css'
 
 ReactDOM.render(
-  <BrowserRouter><App /></BrowserRouter>,
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <App />
+  </BrowserRouter>,
   document.getElementById('root')
 )

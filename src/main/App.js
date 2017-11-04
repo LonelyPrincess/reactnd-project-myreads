@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Loader from './components/Loader';
 import AppInfo from './components/AppInfo';
 import * as BooksAPI from './utils/BooksAPI';
+import Header from './components/Header';
 import BookList from './components/BookList';
 import BookSearch from './components/BookSearch';
 import BookDetails from './components/BookDetails';
@@ -102,23 +103,13 @@ class BooksApp extends React.Component {
    * @returns JSX template for the component.
    */
   render() {
-    const currentPath = window.location.pathname;
-
-    const headerClass = (currentPath === '/'
-      ? 'without-back-button'
-      : (currentPath === '/about'
-        ? 'without-info-button'
-        : null));
-
     return (
       <div className="app">
         {this.state.showLoader && (<Loader />)}
 
-        <header className={headerClass}>
-          {currentPath !== '/' && (<Link className="ico back-button" to="/"></Link>)}
-          <h1>MyReads</h1>
-          {currentPath !== '/about' && (<Link className="ico info-button" to="/about"></Link>)}
-        </header>
+        <Route path="/" render={({ location }) => (
+          <Header currentPath={location.pathname} />
+        )} />
 
         <main>
           { /* Book list page */ }

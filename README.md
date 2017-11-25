@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/LonelyPrincess/reactnd-project-myreads.svg?branch=master)](https://travis-ci.org/LonelyPrincess/reactnd-project-myreads)
 [![Inline docs](http://inch-ci.org/github/LonelyPrincess/reactnd-project-myreads.svg?branch=master&style=shields)](http://inch-ci.org/github/LonelyPrincess/reactnd-project-myreads)
+[![Live demo](https://img.shields.io/badge/live%20demo-available-blue.svg)](https://lonelyprincess.github.io/reactnd-project-myreads)
 
 This is the final project for the first module of the [Udacity's React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019), "React Fundamentals".
 

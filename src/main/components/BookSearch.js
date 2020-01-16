@@ -11,19 +11,12 @@ import * as BooksAPI from '../utils/BooksAPI';
  * @module components/BookSearch
  * @author Sara Hernández <sara.her.su@gmail.com>
  */
-class BookSearch extends React.Component {
+function BookSearch (props) {
 
-  static propTypes = {
-    query: PropTypes.string,
-    showLoader: PropTypes.func.isRequired,
-    getBookShelf: PropTypes.func.isRequired,
-    onShelfChange: PropTypes.func.isRequired
-  };
-
-  state = {
-    query: '',
-    results: []
-  };
+  // Component state
+  const
+    [ query, setQuery ] = React.useState(''),
+    [ results, setResults ] = React.useState([]);
 
   /**
    * Updates the value of the query in the component' state. If the new value
@@ -32,14 +25,14 @@ class BookSearch extends React.Component {
    *
    * @param {string} query - New value for the query input.
    */
-  updateQuery = (query) => {
-    this.setState({ query });
+  const updateQuery = (query) => {
+    setQuery(query);
 
     query = query.trim();
     if (BooksAPI.isValidQuery(query)) {
-      this.performBookSearch(query);
+      performBookSearch(query);
     } else {
-      this.setState({ results: [] });
+      setResults([]);
     }
   };
 
@@ -50,16 +43,16 @@ class BookSearch extends React.Component {
    *
    * @param {string} query - Search term that will be used as a query.
    */
-  performBookSearch = (query) => {
-    this.props.showLoader(true);
+  const performBookSearch = (query) => {
+    props.showLoader(true);
     BooksAPI.search(query)
       .then((results) => {
         let resultsWithShelves = results.map((book) => {
-          book.shelf = this.props.getBookShelf(book.id);
+          book.shelf = props.getBookShelf(book.id);
           return book;
         });
-        this.props.showLoader(false);
-        this.setState({ results: resultsWithShelves });
+        props.showLoader(false);
+        setResults(resultsWithShelves);
       });
   };
 
@@ -68,40 +61,43 @@ class BookSearch extends React.Component {
    * receives a query as a prop, we initialize the query property in the
    * component' state to that value.
    */
-  componentDidMount() {
-    const initialQuery = this.props.query;
+  React.useEffect(() => {
+    const initialQuery = props.query;
     if (initialQuery) {
-      this.updateQuery(initialQuery);
+      updateQuery(initialQuery);
     }
-  }
+  });
 
   /**
    * Returns the view of the component.
    * @returns JSX template for the component.
    */
-  render() {
-    const { query, results } = this.state;
-
-    return (
-      <section className="search-books" data-page="book-search">
-        <input type="search" name="query" placeholder="Search by title or author"
-          value={query} onChange={(event) => {
-            this.updateQuery(event.target.value);
-          }} />
-        <section className="container full-width search-books-results">
-          {query && (results.length === 0
-            ? (<p>No results found for <em>"{query}"</em></p>)
-            : (<p>Showing {results.length} books for <em>"{query}"</em></p>))}
-          <ol className="books-grid">
-            {results.map((book) => (
-              <BookListItem key={book.id} book={book}
-                onShelfChange={this.props.onShelfChange} />
-            ))}
-          </ol>
-        </section>
+  return (
+    <section className="search-books" data-page="book-search">
+      <input type="search" name="query" placeholder="Search by title or author"
+        value={query} onChange={(event) => {
+          updateQuery(event.target.value);
+        }} />
+      <section className="container full-width search-books-results">
+        {query && (results.length === 0
+          ? (<p>No results found for <em>"{query}"</em></p>)
+          : (<p>Showing {results.length} books for <em>"{query}"</em></p>))}
+        <ol className="books-grid">
+          {results.map((book) => (
+            <BookListItem key={book.id} book={book}
+              onShelfChange={props.onShelfChange} />
+          ))}
+        </ol>
       </section>
-    );
-  }
+    </section>
+  );
 }
+
+BookSearch.propTypes = {
+  query: PropTypes.string,
+  showLoader: PropTypes.func.isRequired,
+  getBookShelf: PropTypes.func.isRequired,
+  onShelfChange: PropTypes.func.isRequired
+};
 
 export default BookSearch;

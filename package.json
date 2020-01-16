@@ -1,15 +1,15 @@
 {
   "dependencies": {
-    "prop-types": "^15.5.8",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-router-dom": "^4.2.2"
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "enzyme": "^2.9.1",
-    "gh-pages": "^1.0.0",
-    "react-scripts": "0.9.5",
-    "react-test-renderer": "^15.6.1"
+    "enzyme": "^3.11.0",
+    "gh-pages": "^2.2.0",
+    "react-scripts": "3.3.0",
+    "react-test-renderer": "^16.12.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -18,5 +18,17 @@
     "eject": "react-scripts eject",
     "deploy": "npm run build && gh-pages -d build"
   },
-  "homepage": "https://LonelyPrincess.github.com/reactnd-project-myreads"
+  "homepage": "https://LonelyPrincess.github.com/reactnd-project-myreads",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
